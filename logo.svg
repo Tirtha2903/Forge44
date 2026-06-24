@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="forgeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF512F" />
+      <stop offset="100%" stop-color="#F09819" />
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="120" fill="url(#forgeGrad)"/>
+  <path d="M180 160h192v64H256v48h100v64H256v112h-76V160z" fill="#FFFFFF"/>
+</svg>
