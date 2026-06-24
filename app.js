@@ -1622,3 +1622,37 @@ async function compilePrompt(prompt) {
     stages,
   };
 }
+
+/* ================================================================
+   SCROLLYTELLING INTERSECTION LOGIC
+   ================================================================ */
+window.addEventListener('scroll', () => {
+  const cards = document.querySelectorAll('.scrolly-card');
+  if (!cards.length) return;
+  
+  let activeIndex = 0;
+  cards.forEach((card, idx) => {
+    const rect = card.getBoundingClientRect();
+    if (rect.top <= 20) {
+      activeIndex = idx;
+    }
+  });
+
+  // Fade the background gradients
+  document.querySelectorAll('.scrolly-bg').forEach((bg, idx) => {
+    bg.classList.toggle('active', idx === activeIndex);
+  });
+});
+
+// Use IntersectionObserver to trigger the fade up animation when cards enter the viewport
+const scrollyObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('is-visible');
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.scrolly-card').forEach(card => {
+  scrollyObserver.observe(card);
+});

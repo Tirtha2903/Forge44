@@ -120,6 +120,206 @@
 </section>
 
 <!-- ================================================
+     SCROLLYTELLING SECTION (How it Works)
+     ================================================ -->
+<section class="scrolly-section" id="scrollySection" aria-label="How it works">
+  <div class="scrolly-bg-wrap">
+    <div class="scrolly-bg bg-1 active" id="scrolly-bg-0"></div>
+    <div class="scrolly-bg bg-2" id="scrolly-bg-1"></div>
+    <div class="scrolly-bg bg-3" id="scrolly-bg-2"></div>
+    <div class="scrolly-bg bg-4" id="scrolly-bg-3"></div>
+  </div>
+
+  <div class="scrolly-card-wrap">
+    
+    <!-- CARD 1 -->
+    <div class="scrolly-card scrolly-card-panel" id="scrolly-card-0">
+      <div class="scrolly-card-inner">
+        <div class="scrolly-text">
+          <p class="step-num">01 / 04</p>
+          <h2 class="step-heading">Create at the speed of thought</h2>
+          <p class="step-desc">
+            Tell Forge44 your idea, and watch it transform into a working app with all the building blocks already in place, from beautifully designed pages to user flows and one-click integrations.
+          </p>
+          <button class="step-cta" onclick="document.getElementById('promptInput').focus()">Start building</button>
+        </div>
+        <div class="scrolly-visual">
+          <div class="mockup-window mockup-kanban">
+            <div class="mockup-header">
+              <span class="mockup-dot" style="background:#FDE047"></span>
+              <span class="mockup-title">Steppe Tasks</span>
+              <div class="mockup-avatar"></div>
+            </div>
+            <div class="kanban-body">
+              <div class="kanban-title-row">
+                <h3>All tasks</h3>
+                <div class="kanban-search"><span aria-hidden="true">🔍</span> Search</div>
+              </div>
+              <div class="kanban-board">
+                <div class="kanban-col">
+                  <div class="kanban-col-header" style="background:#D9F99D">Product <span>5</span></div>
+                  <div class="kanban-card">Define MVP scope<span class="kb-tag green">Done</span></div>
+                  <div class="kanban-card">Implement user auth<span class="kb-tag purple">In Progress</span></div>
+                  <div class="kanban-card">Fix edge case<span class="kb-tag red">Blocked</span></div>
+                </div>
+                <div class="kanban-col">
+                  <div class="kanban-col-header" style="background:#C7D2FE">Marketing <span>4</span></div>
+                  <div class="kanban-card">Launch copy<span class="kb-tag orange">Review</span></div>
+                  <div class="kanban-card">Plan beta<span class="kb-tag purple">In Progress</span></div>
+                </div>
+                <div class="kanban-col">
+                  <div class="kanban-col-header" style="background:#FECACA">Design <span>8</span></div>
+                  <div class="kanban-card">Redesign layout<span class="kb-tag green">Done</span></div>
+                  <div class="kanban-card">Empty state illustration<span class="kb-tag red">Blocked</span></div>
+                  <div class="kanban-card">Polish spacing<span class="kb-tag orange">Review</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="scrolly-spacer"></div>
+
+    <!-- CARD 2 -->
+    <div class="scrolly-card scrolly-card-panel" id="scrolly-card-1">
+      <div class="scrolly-card-inner">
+        <div class="scrolly-text">
+          <p class="step-num">02 / 04</p>
+          <h2 class="step-heading">A backend that builds with you</h2>
+          <p class="step-desc">
+            While you shape the idea, Forge44 automatically sets up the logic and infrastructure so your app works out of the box. User logins, authentication, data storage, and role-based permissions are generated behind the scenes.
+          </p>
+          <button class="step-cta" onclick="document.getElementById('promptInput').focus()">Start building</button>
+        </div>
+        <div class="scrolly-visual">
+          <div class="mockup-window mockup-backend">
+            <div class="backend-card">
+              <div class="bc-header">
+                <span class="bc-icon">📦</span>
+                <div>
+                  <div class="bc-title">Cartly</div>
+                  <div class="bc-sub">alex@cartly.store</div>
+                </div>
+              </div>
+              <div class="bc-chat">
+                <div class="bc-chat-msg">
+                  <span class="chat-avatar">🔥</span>
+                  <p>I'll create an e-commerce store with purchase history and inventory data.</p>
+                </div>
+                <div class="bc-log-list">
+                  <div class="bc-log"><span class="log-icon">📄</span> Wrote <strong>login/signup flows</strong></div>
+                  <div class="bc-log"><span class="log-icon">💾</span> Created <strong>user database</strong></div>
+                  <div class="bc-log"><span class="log-icon">🛡️</span> Wrote <strong>roles/permissions logic</strong></div>
+                  <div class="bc-log"><span class="log-icon">🛒</span> Wrote <strong>product catalog/schema</strong></div>
+                  <div class="bc-log"><span class="log-icon">📦</span> Wrote <strong>inventory tracking/stock rules</strong></div>
+                  <div class="bc-log-time" style="font-size: 0.6rem; color: #a1a1aa; margin-top: 12px; margin-bottom: 4px;">10:41 AM.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="scrolly-spacer"></div>
+
+    <!-- CARD 3 -->
+    <div class="scrolly-card scrolly-card-panel" id="scrolly-card-2">
+      <div class="scrolly-card-inner">
+        <div class="scrolly-text">
+          <p class="step-num">03 / 04</p>
+          <h2 class="step-heading">Ready to use, instantly</h2>
+          <p class="step-desc">
+            Your application comes out of the compiler fully functional. With built-in deployment, scalable hosting, and a custom domain setup out-of-the-box, you're ready for users from minute one.
+          </p>
+          <button class="step-cta" onclick="document.getElementById('promptInput').focus()">Start building</button>
+        </div>
+        <div class="scrolly-visual">
+          <div class="mockup-window mockup-deploy">
+            <div class="deploy-sidebar">
+              <div class="d-nav active">⚡ Overview</div>
+              <div class="d-nav">📊 Analytics</div>
+              <div class="d-nav">⚙️ Settings</div>
+            </div>
+            <div class="deploy-main">
+              <div class="deploy-top">
+                <h3>Production</h3>
+                <span class="deploy-status">Live</span>
+              </div>
+              <div class="deploy-url">https://myapp.forge44.app</div>
+              <div class="deploy-metrics">
+                <div class="d-metric">
+                  <span>Requests (24h)</span>
+                  <strong>12,408</strong>
+                </div>
+                <div class="d-metric">
+                  <span>Avg Latency</span>
+                  <strong>42ms</strong>
+                </div>
+              </div>
+              <div class="deploy-chart">
+                <div class="d-bar" style="height: 40%"></div>
+                <div class="d-bar" style="height: 60%"></div>
+                <div class="d-bar" style="height: 35%"></div>
+                <div class="d-bar" style="height: 80%"></div>
+                <div class="d-bar" style="height: 50%"></div>
+                <div class="d-bar" style="height: 90%"></div>
+                <div class="d-bar" style="height: 70%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="scrolly-spacer"></div>
+
+    <!-- CARD 4 -->
+    <div class="scrolly-card scrolly-card-panel" id="scrolly-card-3">
+      <div class="scrolly-card-inner">
+        <div class="scrolly-text">
+          <p class="step-num">04 / 04</p>
+          <h2 class="step-heading">One platform. Any agent.</h2>
+          <p class="step-desc">
+            Stay ahead of the curve. Forge44 is model-agnostic, meaning you can plug in the latest foundation models or bring your own API keys to drive the compiler pipeline.
+          </p>
+          <button class="step-cta" onclick="document.getElementById('promptInput').focus()">Start building</button>
+        </div>
+        <div class="scrolly-visual">
+          <div class="mockup-window mockup-models">
+            <div class="model-header">Compiler AI Engine</div>
+            <div class="model-list">
+              <div class="model-option active">
+                <div class="mo-icon">🤖</div>
+                <div class="mo-info">
+                  <div class="mo-name">Claude 3.5 Sonnet</div>
+                  <div class="mo-desc">Anthropic • Best overall compiler quality</div>
+                </div>
+                <div class="mo-check">✓</div>
+              </div>
+              <div class="model-option">
+                <div class="mo-icon">⚡</div>
+                <div class="mo-info">
+                  <div class="mo-name">GPT-4o</div>
+                  <div class="mo-desc">OpenAI • Fastest response times</div>
+                </div>
+              </div>
+              <div class="model-option">
+                <div class="mo-icon">💎</div>
+                <div class="mo-info">
+                  <div class="mo-name">Gemini 1.5 Pro</div>
+                  <div class="mo-desc">Google • Massive context window</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================================================
      AI COMPILATION SECTION  (revealed on compile)
      ================================================ -->
 <section class="ai-section hidden" id="aiSection" aria-label="AI compilation log">
