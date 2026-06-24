@@ -1,247 +1,312 @@
 <!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AppForge — Natural Language → Working App</title>
-    <meta name="description" content="A compiler-style pipeline that converts product briefs into validated UI, API, database, auth, and business-rule configurations with targeted repair and runtime simulation." />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="./styles.css" />
-  </head>
-  <body>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Forge44 — Turn Your Prompts Into Apps</title>
+  <meta name="description" content="Forge44 is a compiler-style AI pipeline that converts product briefs into validated UI, API, database, auth and business-rule configurations — in seconds."/>
+  <meta property="og:title" content="Forge44 — Turn Your Prompts Into Apps"/>
+  <meta property="og:description" content="Multi-stage AI compiler: Natural language → structured config → validated → executable app."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,800;0,14..32,900;1,14..32,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="./styles.css"/>
+</head>
+<body>
 
-    <!-- ======================== NAV ======================== -->
-    <nav class="app-nav" role="navigation" aria-label="Main navigation">
-      <div class="nav-logo">
-        <div class="nav-logo-icon" aria-hidden="true">⚡</div>
-        AppForge
+<!-- ================================================
+     NAV
+     ================================================ -->
+<nav class="main-nav" id="mainNav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+
+    <a class="nav-logo" href="#" aria-label="Forge44 — home">
+      <span class="nav-logo-icon" aria-hidden="true">🔥</span>
+      <span>Forge<span class="logo-num">44</span></span>
+    </a>
+
+    <div class="nav-links">
+      <a href="#aiSection"    class="nav-link">How it works</a>
+      <a href="#outputSection" class="nav-link">Output</a>
+      <a href="#"             class="nav-link" id="navRunEval">Benchmark</a>
+    </div>
+
+    <div class="nav-actions">
+      <div class="nav-status" id="navStatusBadge" aria-live="polite">
+        <span class="status-dot" aria-hidden="true"></span>
+        <span id="navStatus">Ready</span>
       </div>
-      <div class="nav-actions">
-        <div class="nav-badge" aria-live="polite">
-          <span class="dot" aria-hidden="true"></span>
-          <span id="navStatus">Ready</span>
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle dark/light mode" title="Toggle theme">
+        <span id="themeIcon" aria-hidden="true">🌙</span>
+      </button>
+      <button class="nav-cta" id="navCta">Start Building</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ================================================
+     HERO
+     ================================================ -->
+<section class="hero" id="hero" aria-label="Hero">
+  <div class="hero-inner">
+
+    <p class="hero-eyebrow">
+      <span class="eyebrow-dot" aria-hidden="true"></span>
+      AI App Compiler · Multi-Stage Pipeline · Intelligent Repair
+    </p>
+
+    <h1 class="hero-headline">Turn your prompts<br>into apps</h1>
+
+    <p class="hero-subline">
+      Forge44 converts product briefs into validated UI, API, database,
+      auth &amp; business-rule configurations — with intelligent repair and runtime simulation.
+    </p>
+
+    <!-- PROMPT BOX -->
+    <div class="prompt-wrap" id="promptWrap">
+      <div class="prompt-box" id="promptBox">
+        <textarea
+          id="promptInput"
+          class="prompt-textarea"
+          placeholder="Describe the app you want to build…&#10;&#10;e.g. Build a CRM with login, contacts, dashboard, role-based access,&#10;and a premium plan with payments. Admins can see analytics."
+          rows="5"
+          spellcheck="true"
+          aria-label="App description prompt"
+        ></textarea>
+
+        <div class="prompt-bar">
+          <div class="prompt-bar-left">
+            <button class="pbar-btn" id="clearPrompt" title="Clear prompt" aria-label="Clear prompt">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                <path d="M1 1l10 10M11 1L1 11" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+              </svg>
+            </button>
+            <div class="plan-mode-wrap" title="Planning mode generates a more thorough architecture pass before schema emission" aria-label="Planning mode">
+              <div class="plan-toggle" id="planToggle" role="switch" aria-checked="false">
+                <span class="plan-knob"></span>
+              </div>
+              <span class="plan-label">Plan</span>
+              <button class="info-circle" aria-label="About Plan mode" tabindex="-1">ⓘ</button>
+            </div>
+          </div>
+
+          <div class="prompt-bar-right">
+            <span class="char-count-label" id="charCount" aria-live="polite">0</span>
+            <button class="pbar-btn" title="Voice input (not functional)" aria-label="Voice input">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                <path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v4M8 23h8"/>
+              </svg>
+            </button>
+            <button class="send-btn" id="generateBtn" aria-label="Compile application">
+              <svg id="sendIcon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                <path d="M12 19V5M5 12l7-7 7 7" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
         </div>
-        <button class="eval-run-btn" id="navRunEval" aria-label="Run benchmark">
-          ▶ Run Benchmark
-        </button>
       </div>
-    </nav>
 
-    <main class="shell" role="main">
+      <p class="sample-label">NOT SURE WHERE TO START? TRY ONE OF THESE:</p>
+      <div class="sample-chips" role="group" aria-label="Sample prompts">
+        <button class="sample-chip" id="sampleCrm"         data-sample="crm">CRM System</button>
+        <button class="sample-chip" id="sampleMarketplace" data-sample="marketplace">Marketplace</button>
+        <button class="sample-chip" id="sampleConflict"    data-sample="conflict">Conflict Test</button>
+        <button class="sample-chip" id="sampleVague"       data-sample="vague">Vague Input</button>
+      </div>
+    </div>
 
-      <!-- ======================== HERO ======================== -->
-      <header class="hero" role="banner">
-        <div class="hero-bg" aria-hidden="true"></div>
-        <div class="hero-inner">
-          <div class="hero-copy">
-            <div class="hero-eyebrow" aria-label="Category">
-              <span class="hero-eyebrow-dot" aria-hidden="true"></span>
-              Compiler-Style Generation System
-            </div>
-            <h1 class="hero-headline">
-              Natural Language<br>
-              → <span class="gradient-text">Working App</span>
-            </h1>
-            <p class="hero-subline">
-              Multi-stage pipeline that converts product briefs into validated UI, API,
-              database, auth &amp; business-rule configs — with intelligent repair and
-              runtime simulation.
-            </p>
-            <div class="hero-stats" role="status" aria-label="System status">
-              <div class="stat-card" id="statValidation">
-                <span class="stat-label">Validation</span>
-                <span class="stat-value" id="heroValidation">Ready</span>
-              </div>
-              <div class="stat-card" id="statRuntime">
-                <span class="stat-label">Runtime</span>
-                <span class="stat-value" id="heroRuntime">Idle</span>
-              </div>
-              <div class="stat-card" id="statRepairs">
-                <span class="stat-label">Repair Loops</span>
-                <span class="stat-value" id="heroRepairs">0</span>
-              </div>
-              <div class="stat-card" id="statQuality">
-                <span class="stat-label">Quality Score</span>
-                <span class="stat-value" id="heroQuality">—</span>
-              </div>
-            </div>
+  </div>
+</section>
+
+<!-- ================================================
+     AI COMPILATION SECTION  (revealed on compile)
+     ================================================ -->
+<section class="ai-section hidden" id="aiSection" aria-label="AI compilation log">
+  <div class="ai-section-inner">
+
+    <!-- Left: copy -->
+    <div class="ai-copy">
+      <p class="section-counter">02 / 05</p>
+      <h2 class="ai-section-headline">Compiled at the<br>speed of thought</h2>
+      <p class="ai-section-body">
+        While you describe your idea, Forge44 automatically generates the complete
+        application stack — from database schema to UI components, auth rules, and
+        business logic. No manual setup. No guessing.
+      </p>
+      <div class="ai-badges" id="aiBadges">
+        <span class="ai-badge pass"   id="aiBadgeVal">✓ Validated</span>
+        <span class="ai-badge run"    id="aiBadgeRun">⚡ Executable</span>
+        <span class="ai-badge repair" id="aiBadgeRep">0 repairs</span>
+      </div>
+    </div>
+
+    <!-- Right: AI log card (Base44-style) -->
+    <div class="ai-log-card" id="aiLogCard" aria-live="polite">
+
+      <!-- User row + prompt preview -->
+      <div class="ai-card-top">
+        <div class="ai-user-row">
+          <div class="ai-user-avatar" id="aiUserInitial" aria-hidden="true">U</div>
+          <div>
+            <span class="ai-user-name" id="aiUserName">My App</span>
+            <span class="ai-user-email">user@forge44.ai</span>
           </div>
         </div>
-      </header>
+        <p class="ai-user-prompt" id="aiUserPrompt" aria-label="Submitted prompt"></p>
+      </div>
 
-      <!-- ======================== PIPELINE BAR ======================== -->
-      <section class="pipeline-bar" id="pipeline" aria-label="Compilation pipeline stages" role="list">
-        <!-- Populated by JS -->
-        <article class="stage" role="listitem">
-          <div class="stage-header">
-            <span class="stage-num">1</span>
-            <strong class="stage-name">Intent Extraction</strong>
+      <div class="ai-divider"></div>
+
+      <!-- Bot response -->
+      <div class="ai-bot-section">
+        <div class="ai-bot-row">
+          <div class="ai-bot-avatar" aria-hidden="true">🔥</div>
+          <span class="ai-bot-name">Forge44</span>
+        </div>
+        <p class="ai-intro-text" id="aiIntroText">Building your application…</p>
+        <div class="ai-steps-list" id="aiStepsList" role="list" aria-label="Compilation steps"></div>
+        <div class="ai-success-row hidden" id="aiSuccess">
+          <span class="success-dot" aria-hidden="true"></span>
+          Configuration ready — <strong id="successStats">0 pages, 0 endpoints</strong>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Pipeline stages -->
+  <div class="pipeline-section" id="pipelineSection">
+    <div class="pipeline-inner">
+      <p class="pipeline-section-label">Compilation Pipeline</p>
+      <div class="pipeline-stages" id="pipeline" role="list" aria-label="Pipeline stages"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================
+     OUTPUT SECTION  (revealed on compile)
+     ================================================ -->
+<section class="output-section hidden" id="outputSection" aria-label="Compilation output">
+  <div class="output-inner">
+
+    <!-- Stats row -->
+    <div class="stats-row" role="status" aria-label="Compilation summary">
+      <div class="stat-card" id="statValidation">
+        <p class="stat-label">Validation</p>
+        <p class="stat-value" id="heroValidation">—</p>
+      </div>
+      <div class="stat-card" id="statRuntime">
+        <p class="stat-label">Runtime</p>
+        <p class="stat-value" id="heroRuntime">—</p>
+      </div>
+      <div class="stat-card" id="statRepairs">
+        <p class="stat-label">Repair Loops</p>
+        <p class="stat-value" id="heroRepairs">—</p>
+      </div>
+      <div class="stat-card" id="statQuality">
+        <p class="stat-label">Quality Score</p>
+        <p class="stat-value" id="heroQuality">—</p>
+      </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs-row" role="tablist" aria-label="Output views">
+      <button class="tab-btn active" data-tab="runtime"
+        role="tab" aria-selected="true" aria-controls="runtimeView" id="tab-runtime">
+        🖥&nbsp; Runtime Preview
+      </button>
+      <button class="tab-btn" data-tab="json"
+        role="tab" aria-selected="false" aria-controls="jsonView" id="tab-json">
+        { }&nbsp; Compiled JSON
+      </button>
+      <button class="tab-btn" data-tab="validation"
+        role="tab" aria-selected="false" aria-controls="validationView" id="tab-validation">
+        ✓&nbsp; Validation
+      </button>
+      <button class="tab-btn" data-tab="evaluation"
+        role="tab" aria-selected="false" aria-controls="evaluationView" id="tab-evaluation">
+        📊&nbsp; Evaluation
+      </button>
+    </div>
+
+    <!-- Tab panels -->
+    <div class="tab-panels">
+
+      <!-- RUNTIME PREVIEW -->
+      <section class="tab-panel active" id="runtimeView"
+        role="tabpanel" aria-labelledby="tab-runtime">
+        <div class="runtime-layout">
+          <div class="app-preview" id="appPreview">
+            <div class="preview-empty">
+              <div class="preview-empty-icon">🖥</div>
+              <p class="preview-empty-text">Compile a prompt to see the runtime preview</p>
+            </div>
           </div>
-          <p class="stage-detail">Parse prompt → features, roles, conflicts</p>
-          <div class="stage-loader" aria-hidden="true"></div>
-        </article>
-        <article class="stage" role="listitem">
-          <div class="stage-header">
-            <span class="stage-num">2</span>
-            <strong class="stage-name">System Design</strong>
-          </div>
-          <p class="stage-detail">Intent → entities, flows, policies</p>
-          <div class="stage-loader" aria-hidden="true"></div>
-        </article>
-        <article class="stage" role="listitem">
-          <div class="stage-header">
-            <span class="stage-num">3</span>
-            <strong class="stage-name">Schema Generation</strong>
-          </div>
-          <p class="stage-detail">Emit UI, API, DB, auth contracts</p>
-          <div class="stage-loader" aria-hidden="true"></div>
-        </article>
-        <article class="stage" role="listitem">
-          <div class="stage-header">
-            <span class="stage-num">4</span>
-            <strong class="stage-name">Refinement</strong>
-          </div>
-          <p class="stage-detail">Cross-layer policy reconciliation</p>
-          <div class="stage-loader" aria-hidden="true"></div>
-        </article>
-        <article class="stage" role="listitem">
-          <div class="stage-header">
-            <span class="stage-num">5</span>
-            <strong class="stage-name">Validation</strong>
-          </div>
-          <p class="stage-detail">Strict schema + consistency checks</p>
-          <div class="stage-loader" aria-hidden="true"></div>
-        </article>
+          <aside class="runtime-checks-panel" aria-label="Runtime checks">
+            <h3 class="panel-heading">Runtime Checks</h3>
+            <div id="runtimeChecks"></div>
+          </aside>
+        </div>
       </section>
 
-      <!-- ======================== WORKSPACE ======================== -->
-      <div class="workspace">
-
-        <!-- ======= LEFT: PROMPT PANEL ======= -->
-        <aside class="prompt-panel" aria-label="Product brief input">
-          <div class="panel-topbar">
-            <div class="panel-title-group">
-              <span class="panel-kicker">Input</span>
-              <span class="panel-title">Product Brief</span>
-            </div>
-            <button class="icon-btn" id="clearPrompt" title="Clear prompt" aria-label="Clear prompt">×</button>
+      <!-- COMPILED JSON -->
+      <section class="tab-panel" id="jsonView"
+        role="tabpanel" aria-labelledby="tab-json">
+        <div class="json-toolbar">
+          <span class="json-filename" id="jsonFilename">// app-config.json</span>
+          <div style="display:flex;gap:6px">
+            <button class="action-btn" id="copyJson">Copy</button>
+            <button class="action-btn" id="downloadJson">Download</button>
           </div>
+        </div>
+        <pre id="jsonOutput" aria-label="Generated JSON configuration"><span class="json-comment">// Compile a prompt to see the generated configuration</span></pre>
+      </section>
 
-          <div class="textarea-wrap">
-            <textarea
-              id="promptInput"
-              spellcheck="true"
-              placeholder="Describe your application… e.g. 'Build a CRM with login, contacts, dashboard, role-based access, and premium plan with payments. Admins can see analytics.'"
-              aria-label="Product brief text"
-            ></textarea>
+      <!-- VALIDATION -->
+      <section class="tab-panel" id="validationView"
+        role="tabpanel" aria-labelledby="tab-validation">
+        <div class="validation-inner" id="validationReport">
+          <div class="empty-state">
+            <div class="empty-icon">✓</div>
+            <p class="empty-title">No validation run yet</p>
+            <p class="empty-sub">Compile a prompt to see cross-layer validation results.</p>
           </div>
+        </div>
+      </section>
 
-          <div class="textarea-footer">
-            <span class="char-count" id="charCount" aria-live="polite">0 chars</span>
+      <!-- EVALUATION -->
+      <section class="tab-panel" id="evaluationView"
+        role="tabpanel" aria-labelledby="tab-evaluation">
+        <div class="eval-inner">
+          <div class="eval-toolbar">
+            <h3 class="panel-heading">20-Prompt Benchmark Suite</h3>
+            <button class="run-eval-btn" id="runEvaluation">▶ Run 20 Prompts</button>
           </div>
-
-          <div class="sample-row" role="group" aria-label="Sample prompts">
-            <button class="chip" data-sample="crm" id="sampleCrm">CRM</button>
-            <button class="chip" data-sample="marketplace" id="sampleMarketplace">Marketplace</button>
-            <button class="chip" data-sample="conflict" id="sampleConflict">Conflict</button>
-            <button class="chip" data-sample="vague" id="sampleVague">Vague</button>
+          <div id="evaluationReport">
+            <div class="empty-state">
+              <div class="empty-icon">📊</div>
+              <p class="empty-title">Benchmark not run</p>
+              <p class="empty-sub">Run 10 real-world and 10 edge-case prompts through the full pipeline.</p>
+            </div>
           </div>
+        </div>
+      </section>
 
-          <button class="compile-btn" id="generateBtn" aria-label="Compile application">
-            <span class="btn-inner">
-              <span class="spinner" aria-hidden="true"></span>
-              <span id="btnLabel">⚡ Compile App</span>
-            </span>
-          </button>
-        </aside>
+    </div><!-- /tab-panels -->
+  </div>
+</section>
 
-        <!-- ======= RIGHT: OUTPUT PANEL ======= -->
-        <section class="output-panel" aria-label="Compilation output">
+<!-- ================================================
+     FOOTER
+     ================================================ -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span class="footer-logo">🔥 Forge44</span>
+    <span class="footer-copy">Multi-stage AI compiler system · Natural language → Working app</span>
+  </div>
+</footer>
 
-          <!-- Tabs -->
-          <nav class="tabs-bar" aria-label="Output sections" role="tablist">
-            <button class="tab active" data-tab="runtime" role="tab" aria-selected="true" id="tab-runtime">
-              <span class="tab-icon" aria-hidden="true">🖥</span> Runtime Preview
-            </button>
-            <button class="tab" data-tab="json" role="tab" aria-selected="false" id="tab-json">
-              <span class="tab-icon" aria-hidden="true">{ }</span> Compiled JSON
-            </button>
-            <button class="tab" data-tab="validation" role="tab" aria-selected="false" id="tab-validation">
-              <span class="tab-icon" aria-hidden="true">✓</span> Validation
-            </button>
-            <button class="tab" data-tab="evaluation" role="tab" aria-selected="false" id="tab-evaluation">
-              <span class="tab-icon" aria-hidden="true">📊</span> Evaluation
-            </button>
-          </nav>
-
-          <!-- Runtime Preview Tab -->
-          <section class="tab-view active" id="runtimeView" role="tabpanel" aria-labelledby="tab-runtime">
-            <div class="runtime-grid">
-              <div class="app-preview" id="appPreview">
-                <div class="app-shell-placeholder">
-                  <div class="placeholder-icon" aria-hidden="true">⚡</div>
-                  <p class="placeholder-text">Compile a prompt to render your generated application.</p>
-                </div>
-              </div>
-              <aside class="runtime-log" aria-label="Runtime checks">
-                <div class="runtime-log-header">
-                  <span class="panel-kicker">Execution</span>
-                  <span class="panel-title">Runtime Checks</span>
-                </div>
-                <div id="runtimeChecks"></div>
-              </aside>
-            </div>
-          </section>
-
-          <!-- JSON Output Tab -->
-          <section class="tab-view" id="jsonView" role="tabpanel" aria-labelledby="tab-json">
-            <div class="json-toolbar">
-              <span class="json-toolbar-title" id="jsonFilename">// app-config.json</span>
-              <button class="btn-secondary" id="copyJson" aria-label="Copy JSON to clipboard">Copy</button>
-              <button class="btn-secondary" id="downloadJson" aria-label="Download JSON file">Download</button>
-            </div>
-            <pre id="jsonOutput" aria-label="Generated JSON configuration" role="region"><span style="color:var(--text-muted)">// Compile a prompt to see the generated configuration</span></pre>
-          </section>
-
-          <!-- Validation Tab -->
-          <section class="tab-view" id="validationView" role="tabpanel" aria-labelledby="tab-validation">
-            <div class="validation-view-inner">
-              <div id="validationReport">
-                <div class="empty-state">
-                  <div class="empty-icon" aria-hidden="true">✓</div>
-                  <p class="empty-title">No validation run yet</p>
-                  <p class="empty-sub">Compile a prompt to see validation results, assumptions, and repair logs.</p>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <!-- Evaluation Tab -->
-          <section class="tab-view" id="evaluationView" role="tabpanel" aria-labelledby="tab-evaluation">
-            <div class="eval-view-inner">
-              <div class="eval-toolbar">
-                <span class="eval-toolbar-title">20-Prompt Benchmark Suite</span>
-                <button class="eval-run-btn" id="runEvaluation" aria-label="Run full evaluation benchmark">
-                  ▶ Run 20 Prompts
-                </button>
-              </div>
-              <div id="evaluationReport">
-                <div class="empty-state">
-                  <div class="empty-icon" aria-hidden="true">📊</div>
-                  <p class="empty-title">Benchmark not run</p>
-                  <p class="empty-sub">Click "Run 20 Prompts" to evaluate the pipeline across 10 real-world and 10 edge-case prompts.</p>
-                </div>
-              </div>
-            </div>
-          </section>
-
-        </section><!-- /output-panel -->
-      </div><!-- /workspace -->
-
-    </main>
-
-    <script src="./app.js"></script>
-  </body>
+<script src="./app.js"></script>
+</body>
 </html>
