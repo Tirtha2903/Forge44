@@ -1654,5 +1654,77 @@ const scrollyObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.15 });
 
 document.querySelectorAll('.scrolly-card').forEach(card => {
-  scrollyObserver.observe(card);
 });
+
+/* ================================================================
+   MOBILE MENU TOGGLE
+   ================================================================ */
+const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+const navLinks = document.getElementById('navLinks');
+if (mobileMenuBtn && navLinks) {
+  mobileMenuBtn.addEventListener('click', () => {
+    const isExpanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
+    mobileMenuBtn.setAttribute('aria-expanded', !isExpanded);
+    navLinks.classList.toggle('show-mobile');
+    
+    // Toggle icons
+    const openIcon = mobileMenuBtn.querySelector('.menu-icon-open');
+    const closeIcon = mobileMenuBtn.querySelector('.menu-icon-close');
+    if (openIcon && closeIcon) {
+      openIcon.classList.toggle('hidden');
+      closeIcon.classList.toggle('hidden');
+    }
+  });
+}
+
+/* ================================================================
+   SIGN IN MODAL
+   ================================================================ */
+const signInBtn = document.getElementById('navSignIn');
+const signInModal = document.getElementById('signInModal');
+const closeSignIn = document.getElementById('closeSignIn');
+
+if (signInBtn && signInModal && closeSignIn) {
+  const openModal = () => {
+    signInModal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden'; // Prevent background scrolling
+  };
+  
+  const closeModal = () => {
+    signInModal.classList.add('hidden');
+    document.body.style.overflow = '';
+  };
+  
+  signInBtn.addEventListener('click', openModal);
+  closeSignIn.addEventListener('click', closeModal);
+  
+  // Close on background click
+  signInModal.addEventListener('click', (e) => {
+    if (e.target === signInModal) {
+      closeModal();
+    }
+  });
+  
+  // Close on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !signInModal.classList.contains('hidden')) {
+      closeModal();
+    }
+  });
+}
+
+/* ================================================================
+   BOTTOM CTA SCROLL
+   ================================================================ */
+const bottomCtaBtn = document.getElementById('bottomCtaBtn');
+if (bottomCtaBtn) {
+  bottomCtaBtn.addEventListener('click', () => {
+    const promptInput = document.getElementById('promptInput');
+    if (promptInput) {
+      promptInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      setTimeout(() => promptInput.focus(), 400);
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  });
+}
