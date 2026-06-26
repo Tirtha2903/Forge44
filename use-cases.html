@@ -3,98 +3,201 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Forge44 — Use Cases</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,800;0,14..32,900;1,14..32,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="./styles.css"/>
   <link rel="icon" href="./logo.svg" type="image/svg+xml"/>
-  <style>
-    .dummy-page-content {
-      padding: 140px 24px;
-      text-align: center;
-      min-height: 60vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-    .dummy-page-title {
-      font-size: 3rem;
-      font-weight: 800;
-      color: var(--text-1);
-      margin-bottom: 16px;
-    }
-    .dummy-page-desc {
-      font-size: 1.1rem;
-      color: var(--text-2);
-      max-width: 500px;
-    }
-  </style>
+  <title>Forge44 — Use Cases</title>
+  <meta name="description" content="See how startups, enterprises, developers, agencies and educators use Forge44."/>
 </head>
 <body>
-
 <nav class="main-nav" id="mainNav" role="navigation" aria-label="Main navigation">
   <div class="nav-inner">
-    <a class="nav-logo" href="index.html" aria-label="Forge44 — home">
+    <a class="nav-logo" href="index.html" aria-label="Forge44 home">
       <img src="./logo.svg" alt="Forge44 Logo" class="nav-logo-img" />
       <span>Forge<span class="logo-num">44</span></span>
     </a>
-
     <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu" aria-expanded="false">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="menu-icon-open"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="menu-icon-close hidden"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
     </button>
-
     <div class="nav-links" id="navLinks">
-      <a href="product.html" class="nav-link">Product <span class="nav-arrow">⌄</span></a>
-      <a href="use-cases.html" class="nav-link">Use Cases <span class="nav-arrow">⌄</span></a>
-      <a href="resources.html" class="nav-link">Resources <span class="nav-arrow">⌄</span></a>
+      <div class="nav-item">
+        <a href="product.html" class="nav-link">Product <span class="nav-arrow">&#8964;</span></a>
+        <div class="nav-dropdown wide">
+          <a href="product.html#features" class="nav-dropdown-item"><div class="nav-dd-icon">&#128293;</div><div><div class="nav-dd-title">AI Compiler</div><div class="nav-dd-sub">5-stage pipeline from prompt to app</div></div></a>
+          <a href="product.html#pipeline" class="nav-dropdown-item"><div class="nav-dd-icon">&#9881;</div><div><div class="nav-dd-title">How It Works</div><div class="nav-dd-sub">Intent to Validate in seconds</div></div></a>
+          <a href="product.html#integrations" class="nav-dropdown-item"><div class="nav-dd-icon">&#128268;</div><div><div class="nav-dd-title">Integrations</div><div class="nav-dd-sub">Stripe, Supabase, Vercel and more</div></div></a>
+          <a href="product.html#export" class="nav-dropdown-item"><div class="nav-dd-icon">&#128230;</div><div><div class="nav-dd-title">Schema Export</div><div class="nav-dd-sub">Export React, Node.js, or raw JSON</div></div></a>
+          <a href="product.html#models" class="nav-dropdown-item"><div class="nav-dd-icon">&#129302;</div><div><div class="nav-dd-title">Multi-Model</div><div class="nav-dd-sub">Claude, GPT-4o, Gemini</div></div></a>
+          <a href="pricing.html" class="nav-dropdown-item"><div class="nav-dd-icon">&#128142;</div><div><div class="nav-dd-title">Pricing</div><div class="nav-dd-sub">Free tier + Pro and Enterprise</div></div></a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a href="use-cases.html" class="nav-link">Use Cases <span class="nav-arrow">&#8964;</span></a>
+        <div class="nav-dropdown">
+          <a href="use-cases.html#startups" class="nav-dropdown-item"><div class="nav-dd-icon">&#128640;</div><div><div class="nav-dd-title">Startups</div><div class="nav-dd-sub">Ship an MVP in hours</div></div></a>
+          <a href="enterprise.html" class="nav-dropdown-item"><div class="nav-dd-icon">&#127962;</div><div><div class="nav-dd-title">Enterprise</div><div class="nav-dd-sub">Scalable internal tools</div></div></a>
+          <a href="use-cases.html#developers" class="nav-dropdown-item"><div class="nav-dd-icon">&#128187;</div><div><div class="nav-dd-title">Developers</div><div class="nav-dd-sub">Skip boilerplate, keep control</div></div></a>
+          <a href="use-cases.html#agencies" class="nav-dropdown-item"><div class="nav-dd-icon">&#127912;</div><div><div class="nav-dd-title">Agencies</div><div class="nav-dd-sub">Deliver projects 10x faster</div></div></a>
+          <a href="use-cases.html#education" class="nav-dropdown-item"><div class="nav-dd-icon">&#127891;</div><div><div class="nav-dd-title">Education</div><div class="nav-dd-sub">Teach building, not config</div></div></a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a href="resources.html" class="nav-link">Resources <span class="nav-arrow">&#8964;</span></a>
+        <div class="nav-dropdown">
+          <a href="resources.html#docs" class="nav-dropdown-item"><div class="nav-dd-icon">&#128218;</div><div><div class="nav-dd-title">Documentation</div><div class="nav-dd-sub">Guides, API refs, examples</div></div></a>
+          <a href="resources.html#tutorials" class="nav-dropdown-item"><div class="nav-dd-icon">&#127916;</div><div><div class="nav-dd-title">Tutorials</div><div class="nav-dd-sub">Step-by-step video guides</div></div></a>
+          <a href="resources.html#blog" class="nav-dropdown-item"><div class="nav-dd-icon">&#9997;</div><div><div class="nav-dd-title">Blog</div><div class="nav-dd-sub">Updates and deep-dives</div></div></a>
+          <a href="resources.html#community" class="nav-dropdown-item"><div class="nav-dd-icon">&#128172;</div><div><div class="nav-dd-title">Community</div><div class="nav-dd-sub">Discord, forum, office hours</div></div></a>
+        </div>
+      </div>
       <a href="pricing.html" class="nav-link">Pricing</a>
       <a href="enterprise.html" class="nav-link">Enterprise</a>
     </div>
-
     <div class="nav-actions">
-      <button class="nav-icon-btn" aria-label="Language selection" title="Language">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
-      </button>
-      <button class="theme-btn" id="themeToggle" aria-label="Toggle dark/light mode" title="Toggle theme">
-        <span id="themeIcon" aria-hidden="true">🌙</span>
-      </button>
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle dark/light mode"><span id="themeIcon" aria-hidden="true">&#127769;</span></button>
       <button class="nav-cta" id="navCta" onclick="window.location.href='index.html'">Start Building</button>
       <button class="nav-signin" id="navSignIn">Sign In</button>
+      <button class="nav-user-avatar hidden" id="navUserAvatar" aria-label="Account"><img id="navUserImg" src="" alt="User" class="nav-user-img" /></button>
     </div>
   </div>
 </nav>
 
-<div class="dummy-page-content">
-  <h1 class="dummy-page-title">Use Cases</h1>
-  <p class="dummy-page-desc">This is a placeholder page for the Forge44 Use Cases section.</p>
-</div>
+<section class="page-hero">
+  <div class="page-hero-eyebrow">&#129309; Who Builds with Forge44</div>
+  <h1 class="page-hero-title">One platform.<br/><em>Every builder.</em></h1>
+  <p class="page-hero-sub">Whether you are a solo founder racing to validate an idea, or an enterprise team replacing a legacy system, Forge44 scales to meet you where you are.</p>
+  <div class="page-hero-actions">
+    <button class="nav-cta" style="font-size:1rem;padding:14px 32px;" onclick="window.location.href='index.html'">Start Building</button>
+  </div>
+</section>
 
-<footer class="site-footer">
-  <div class="footer-inner">
-    <span class="footer-logo">🔥 Forge44</span>
-    <span class="footer-copy">Multi-stage AI compiler system · Natural language → Working app</span>
+<section class="inner-section" id="startups">
+  <p class="section-label">&#128194; All Use Cases</p>
+  <h2 class="section-title">Built for every kind of builder.</h2>
+  <p class="section-sub">Forge44 adapts to your workflow. See how different teams and roles use the platform.</p>
+  <div class="uc-grid">
+    <div class="uc-card">
+      <div class="uc-emoji">&#128640;</div>
+      <div class="uc-title">Startups &amp; Founders</div>
+      <p class="uc-desc">Go from idea to working MVP in a single afternoon. Validate your product with real users before writing a single line of custom code.</p>
+      <div class="uc-tags"><span class="uc-tag">MVP in hours</span><span class="uc-tag">Idea validation</span><span class="uc-tag">No hiring needed</span></div>
+    </div>
+    <div class="uc-card" id="developers">
+      <div class="uc-emoji">&#128187;</div>
+      <div class="uc-title">Developers</div>
+      <p class="uc-desc">Skip the boilerplate and scaffold your entire project in seconds. Export the code and extend it with your own logic. Use Forge44 as your senior architect.</p>
+      <div class="uc-tags"><span class="uc-tag">Code export</span><span class="uc-tag">API-first</span><span class="uc-tag">Multi-model</span></div>
+    </div>
+    <div class="uc-card" id="agencies">
+      <div class="uc-emoji">&#127912;</div>
+      <div class="uc-title">Agencies</div>
+      <p class="uc-desc">Deliver client projects in days instead of months. Generate the base architecture, then customize the front-end to match each client brand.</p>
+      <div class="uc-tags"><span class="uc-tag">10x faster delivery</span><span class="uc-tag">Brand customization</span><span class="uc-tag">White-label ready</span></div>
+    </div>
+    <div class="uc-card">
+      <div class="uc-emoji">&#127962;</div>
+      <div class="uc-title">Enterprise Teams</div>
+      <p class="uc-desc">Replace fragile internal tools with AI-compiled replacements. Role-based access, audit logs, and compliance-ready architecture come standard.</p>
+      <div class="uc-tags"><span class="uc-tag">RBAC built-in</span><span class="uc-tag">Self-hosted</span><span class="uc-tag">SOC 2 ready</span></div>
+    </div>
+    <div class="uc-card" id="education">
+      <div class="uc-emoji">&#127891;</div>
+      <div class="uc-title">Education</div>
+      <p class="uc-desc">Teach students to think in systems, not syntax. Forge44 lets learners describe an app and immediately see it come to life from day one.</p>
+      <div class="uc-tags"><span class="uc-tag">No prerequisites</span><span class="uc-tag">Instant feedback</span><span class="uc-tag">Project-based</span></div>
+    </div>
+    <div class="uc-card">
+      <div class="uc-emoji">&#129516;</div>
+      <div class="uc-title">Indie Hackers</div>
+      <p class="uc-desc">Build and ship side projects at the speed of thought. Stop context-switching. Forge44 is a single prompt from idea to live app.</p>
+      <div class="uc-tags"><span class="uc-tag">Solo-friendly</span><span class="uc-tag">Free tier</span><span class="uc-tag">Instant deploy</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="inner-section inner-section-alt">
+  <p class="section-label">&#11088; From Builders Like You</p>
+  <h2 class="section-title">What real users say.</h2>
+  <p class="section-sub">Early access builders share their experience with the Forge44 compiler.</p>
+  <div class="testimonials-grid">
+    <div class="testimonial-card">
+      <p class="tc-quote">I described my SaaS idea in two sentences and had a working MVP with login, dashboard, and billing in under 20 minutes. I was genuinely shocked.</p>
+      <div class="tc-author"><div class="tc-avatar">&#128105;</div><div><div class="tc-name">Priya S.</div><div class="tc-role">Founder, Stackify</div></div></div>
+    </div>
+    <div class="testimonial-card">
+      <p class="tc-quote">As an agency, we now use Forge44 as our starting point for every client. We export the schema, customise the frontend, and ship in a fraction of our previous timeline.</p>
+      <div class="tc-author"><div class="tc-avatar">&#128104;</div><div><div class="tc-name">Marco L.</div><div class="tc-role">CTO, Bright Studio</div></div></div>
+    </div>
+    <div class="testimonial-card">
+      <p class="tc-quote">I use it to prototype internal tools. What used to take a sprint now takes a lunch break. The repair loop is particularly impressive.</p>
+      <div class="tc-author"><div class="tc-avatar">&#129489;</div><div><div class="tc-name">Alex K.</div><div class="tc-role">Engineering Lead, Nimbus</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="bottom-cta-section">
+  <div class="bottom-cta-inner">
+    <h2 class="cta-heading">Which builder are you?</h2>
+    <p class="cta-sub">Start free and see how Forge44 fits your workflow in minutes.</p>
+    <button class="nav-cta cta-large" onclick="window.location.href='index.html'">Try Forge44 Free</button>
+  </div>
+</section>
+<footer class="page-footer">
+  <div class="page-footer-inner">
+    <div class="footer-brand footer-col">
+      <span class="footer-logo" style="font-size:1.1rem;font-weight:800;">&#128293; Forge44</span>
+      <p>The AI compiler that turns natural language into production-ready applications.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Product</h4>
+      <a href="product.html">Features</a>
+      <a href="product.html#pipeline">How it Works</a>
+      <a href="product.html#integrations">Integrations</a>
+      <a href="pricing.html">Pricing</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="use-cases.html">Use Cases</a>
+      <a href="enterprise.html">Enterprise</a>
+      <a href="resources.html#blog">Blog</a>
+      <a href="#">Careers</a>
+    </div>
+    <div class="footer-col">
+      <h4>Resources</h4>
+      <a href="resources.html#docs">Documentation</a>
+      <a href="resources.html#tutorials">Tutorials</a>
+      <a href="resources.html#community">Community</a>
+      <a href="#">Status</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&#169; 2025 Forge44. All rights reserved.</span>
+    <span>Privacy &middot; Terms &middot; Security</span>
   </div>
 </footer>
-
 <div class="modal-overlay hidden" id="signInModal">
   <div class="modal-content">
-    <button class="modal-close" id="closeSignIn" aria-label="Close modal">✕</button>
-    <h2 class="modal-title">Sign In</h2>
-    <p class="modal-sub">Welcome back to Forge44.</p>
-    <div class="modal-actions">
-      <button class="auth-btn github-btn">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-        Sign in with GitHub
-      </button>
-      <button class="auth-btn google-btn">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"/></svg>
-        Sign in with Google
-      </button>
+    <button class="modal-close" id="closeSignIn" aria-label="Close modal">&#x2715;</button>
+    <div id="modalSignedOut">
+      <h2 class="modal-title">Welcome to Forge44</h2>
+      <p class="modal-sub">Sign in to start building apps with AI.</p>
+      <div class="modal-actions">
+        <button class="auth-btn github-btn" id="githubSignIn"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg> Sign in with GitHub</button>
+        <button class="auth-btn google-btn" id="googleSignIn"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"/></svg> Sign in with Google</button>
+      </div>
+      <p class="auth-error" id="authErrorMsg" style="display:none;"></p>
+    </div>
+    <div id="modalSignedIn" class="hidden">
+      <div class="modal-user-info"><img id="modalUserPhoto" class="modal-user-photo" src="" alt="User" /><div class="modal-user-details"><div id="modalUserName" class="modal-user-name"></div><div id="modalUserEmail" class="modal-user-email"></div></div></div>
+      <p class="modal-signed-in-sub">You are signed in to Forge44 &#128293;</p>
+      <button class="auth-btn sign-out-btn" id="signOutBtn">Sign Out</button>
     </div>
   </div>
 </div>
-
 <script src="./app.js"></script>
+<script type="module" src="./auth.js"></script>
 </body>
 </html>
