@@ -1679,42 +1679,6 @@ if (mobileMenuBtn && navLinks) {
 }
 
 /* ================================================================
-   SIGN IN MODAL
-   ================================================================ */
-const signInBtn = document.getElementById('navSignIn');
-const signInModal = document.getElementById('signInModal');
-const closeSignIn = document.getElementById('closeSignIn');
-
-if (signInBtn && signInModal && closeSignIn) {
-  const openModal = () => {
-    signInModal.classList.remove('hidden');
-    document.body.style.overflow = 'hidden'; // Prevent background scrolling
-  };
-  
-  const closeModal = () => {
-    signInModal.classList.add('hidden');
-    document.body.style.overflow = '';
-  };
-  
-  signInBtn.addEventListener('click', openModal);
-  closeSignIn.addEventListener('click', closeModal);
-  
-  // Close on background click
-  signInModal.addEventListener('click', (e) => {
-    if (e.target === signInModal) {
-      closeModal();
-    }
-  });
-  
-  // Close on Escape key
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && !signInModal.classList.contains('hidden')) {
-      closeModal();
-    }
-  });
-}
-
-/* ================================================================
    BOTTOM CTA SCROLL
    ================================================================ */
 const bottomCtaBtn = document.getElementById('bottomCtaBtn');

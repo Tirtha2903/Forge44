@@ -2054,6 +2054,99 @@ a { color: inherit; text-decoration: none; }
 [data-theme="dark"] .github-btn { background: #fff; color: #24292e; border-color: #fff; }
 [data-theme="dark"] .github-btn:hover { background: #f3f4f6; }
 
+/* Sign-out button */
+.sign-out-btn {
+  background: var(--surface-2);
+  color: var(--text-2);
+  border: 1px solid var(--border-mid);
+  width: 100%;
+  margin-top: 8px;
+}
+.sign-out-btn:hover { background: var(--surface); color: var(--text-1); }
+
+/* Auth error */
+.auth-error {
+  margin-top: 12px;
+  font-size: 0.85rem;
+  color: #ef4444;
+  text-align: center;
+  padding: 8px 12px;
+  background: rgba(239,68,68,0.08);
+  border-radius: var(--r-md);
+}
+
+/* Auth loading spinner */
+.auth-spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: currentColor;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  vertical-align: middle;
+  margin-right: 4px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Nav user avatar (shown when signed in) */
+.nav-user-avatar {
+  background: transparent;
+  border: 2px solid var(--border-mid);
+  border-radius: 50%;
+  padding: 2px;
+  cursor: pointer;
+  transition: border-color var(--t-fast), transform var(--t-fast);
+  width: 36px;
+  height: 36px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.nav-user-avatar:hover { border-color: var(--accent); transform: scale(1.05); }
+.nav-user-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* Modal signed-in view */
+.modal-user-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  background: var(--surface-2);
+  border-radius: var(--r-lg);
+  border: 1px solid var(--border);
+  margin-bottom: 16px;
+}
+.modal-user-photo {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+.modal-user-name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-1);
+}
+.modal-user-email {
+  font-size: 0.82rem;
+  color: var(--text-3);
+  margin-top: 2px;
+}
+.modal-signed-in-sub {
+  font-size: 0.9rem;
+  color: var(--text-2);
+  text-align: center;
+  margin-bottom: 20px;
+}
+
 /* Responsive adjustments for new sections */
 @media (max-width: 760px) {
   .mobile-menu-btn { display: block; }
