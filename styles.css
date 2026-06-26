@@ -605,7 +605,7 @@ a { color: inherit; text-decoration: none; }
 }
 
 .scrolly-spacer {
-  height: 80vh; /* The amount of scrolling required to bring the next card up */
+  height: 40vh; /* Reduced from 80vh to bring the next card up sooner */
 }
 
 .scrolly-card-inner {
@@ -620,12 +620,12 @@ a { color: inherit; text-decoration: none; }
   box-shadow: var(--shadow-xl);
   border: 1px solid var(--border-mid);
   overflow: hidden;
-  transform: translateY(80px);
-  opacity: 0;
-  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease;
+  transform: translateY(100px) scale(0.95);
+  opacity: 0.3; /* Increased from 0 so the user sees it coming up */
+  transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1), opacity 1s ease;
 }
 .scrolly-card.is-visible .scrolly-card-inner {
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
   opacity: 1;
 }
 

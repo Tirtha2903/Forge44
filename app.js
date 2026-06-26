@@ -1654,6 +1654,7 @@ const scrollyObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.15 });
 
 document.querySelectorAll('.scrolly-card').forEach(card => {
+  scrollyObserver.observe(card);
 });
 
 /* ================================================================
