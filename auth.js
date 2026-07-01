@@ -1,4 +1,4 @@
-﻿// ============================================================
+// ============================================================
 //  FORGE44— Firebase Auth Module
 //  Handles GitHub + Google sign-in, auth state, and UI updates
 // ============================================================
@@ -69,6 +69,12 @@ document.addEventListener("keydown", (e) => {
 // ── Auth state observer ───────────────────────────────────────
 onAuthStateChanged(auth, (user) => {
   if (user) {
+    // — Expose user for app.js to attach auth tokens to API calls —
+    // app.js is a classic (non-module) script and cannot import from auth.js.
+    // This window property is the bridge between the two execution contexts.
+    // It is set BEFORE UI updates so the token is available immediately.
+    window.__forge44User = user;
+
     // — Show user avatar in nav, hide sign-in button —
     navSignInBtn?.classList.add("hidden");
     if (navUserAvatar) {
@@ -86,6 +92,9 @@ onAuthStateChanged(auth, (user) => {
     modalSignedOut?.classList.add("hidden");
     modalSignedIn?.classList.remove("hidden");
   } else {
+    // — Clear the exposed user reference on sign-out —
+    window.__forge44User = null;
+
     // — Signed out: restore default UI —
     navSignInBtn?.classList.remove("hidden");
     navUserAvatar?.classList.add("hidden");

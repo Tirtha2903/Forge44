@@ -1,4 +1,4 @@
-﻿/* ================================================================
+/* ================================================================
    FORGE44 COMPILER â€” app.js
    Multi-stage pipeline: Intent â†’ Design â†’ Schema â†’ Refine â†’ Validate â†’ Repair â†’ Runtime
    ================================================================ */
@@ -859,6 +859,28 @@ function pageIcon(name) {
 }
 
 /* ================================================================
+   AUTH TOKEN HELPER
+   Retrieves the current user's Firebase ID token to send with API
+   requests. Authenticated users receive higher rate limits on the
+   backend. This function always resolves (never throws).
+   ================================================================ */
+
+/**
+ * @returns {Promise<object>} Authorization header object, or {} if not signed in
+ */
+async function getAuthHeaders() {
+  try {
+    const user = window.__forge44User;
+    if (!user || typeof user.getIdToken !== 'function') return {};
+    const token = await user.getIdToken(/* forceRefresh */ false);
+    return token ? { 'Authorization': `Bearer ${token}` } : {};
+  } catch {
+    // Token retrieval failed (network, revoked, etc.) — compile as anonymous
+    return {};
+  }
+}
+
+/* ================================================================
    COMPILE API CLIENT
    ================================================================ */
 
@@ -888,9 +910,14 @@ async function compilePrompt(prompt) {
   const timeoutId  = setTimeout(() => controller.abort(), TIMEOUT_MS);
 
   try {
+    // Include Firebase ID token if the user is signed in.
+    // The backend uses this to grant authenticated users higher rate limits.
+    // Falls back to {} (empty) if the user is not signed in or token retrieval fails.
+    const authHeaders = await getAuthHeaders();
+
     const response = await fetch(COMPILE_URL, {
       method:  'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', ...authHeaders },
       body:    JSON.stringify({ prompt, planMode }),
       signal:  controller.signal,
     });

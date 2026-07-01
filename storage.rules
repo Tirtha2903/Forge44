@@ -1,0 +1,43 @@
+rules_version = '2';
+
+// ============================================================
+//  FORGE44 — Firebase Storage Security Rules
+//
+//  Current status: Forge44 does not use Firebase Storage.
+//  All paths are permanently denied from client SDK access.
+//
+//  Future file upload support:
+//    Uncomment and customize the /users/{userId}/{allPaths=**}
+//    block below when file uploads are added. Follow these
+//    principles when doing so:
+//      1. Always require authentication (request.auth != null)
+//      2. Enforce user isolation (request.auth.uid == userId)
+//      3. Limit file sizes (request.resource.size < N)
+//      4. Restrict content types (request.resource.contentType.matches(...))
+//      5. Never allow public write access
+// ============================================================
+
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    // ── Default: deny all ────────────────────────────────────────────────
+    // Forge44 does not currently use Firebase Storage.
+    // This rule ensures no accidental data exposure.
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+
+    // ── User uploads (future) ─────────────────────────────────────────────
+    // Uncomment when file uploads are needed:
+    //
+    // match /users/{userId}/{allPaths=**} {
+    //   allow read:  if request.auth != null && request.auth.uid == userId;
+    //   allow write: if request.auth != null
+    //                && request.auth.uid == userId
+    //                && request.resource.size < 5 * 1024 * 1024   // 5 MB max
+    //                && request.resource.contentType.matches('image/(png|jpeg|webp|gif)');
+    //   allow delete: if request.auth != null && request.auth.uid == userId;
+    // }
+
+  }
+}
