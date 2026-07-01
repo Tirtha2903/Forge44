@@ -204,10 +204,11 @@ module.exports = async function handler(req, res) {
     }
 
     if (statusCode >= 500) {
-      // Server-side errors: log the error code for internal debugging.
-      // We intentionally do NOT log err.message here — provider-generated
-      // messages may contain internal service names, model IDs, or other
-      // data that should not appear in log aggregators.
+      // Server-side errors: log the Forge44 error code, and — if this was a
+      // provider error — the full diagnostic bag captured in lib/compiler/llm.js.
+      // _diag is a server-only field; toHttpResponse() ignores it and the
+      // client never sees it. See the PROVIDER_ERROR block in llm.js for the
+      // full Gemini SDK error shape that populates these fields.
       logger.error('compile.serverError', {
         requestId,
         durationMs,
@@ -215,6 +216,10 @@ module.exports = async function handler(req, res) {
         errorCode: err.code ?? 'UNKNOWN',
         // err.name is safe (e.g. 'Forge44Error', 'Error') — no internals
         errorName: err.name ?? 'Error',
+        // Spread provider diagnostics when present (PROVIDER_ERROR path only).
+        // Fields: providerStatus, providerStatusText, providerMessage,
+        //         providerDetails, providerStack (and providerFeedback on safety blocks).
+        ...(err._diag != null ? { provider: err._diag } : {}),
       });
     } else {
       // Client-side rejections (4xx): log with warn severity
