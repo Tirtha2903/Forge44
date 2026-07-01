@@ -209,17 +209,29 @@ module.exports = async function handler(req, res) {
       // _diag is a server-only field; toHttpResponse() ignores it and the
       // client never sees it. See the PROVIDER_ERROR block in llm.js for the
       // full Gemini SDK error shape that populates these fields.
+      //
+      // Key fields hoisted to the top level of the log entry so they are
+      // readable even when log viewers truncate deeply nested JSON:
+      //   providerStatus      — HTTP status Gemini returned (e.g. 429, 500, 503)
+      //   providerMessage     — Full Gemini API error message (safe; no API key)
+      //   providerErrorClass  — SDK class name (GoogleGenerativeAIFetchError, etc.)
+      const diag = err._diag ?? null;
       logger.error('compile.serverError', {
         requestId,
         durationMs,
         statusCode,
-        errorCode: err.code ?? 'UNKNOWN',
+        errorCode:  err.code ?? 'UNKNOWN',
         // err.name is safe (e.g. 'Forge44Error', 'Error') — no internals
-        errorName: err.name ?? 'Error',
-        // Spread provider diagnostics when present (PROVIDER_ERROR path only).
-        // Fields: providerStatus, providerStatusText, providerMessage,
-        //         providerDetails, providerStack (and providerFeedback on safety blocks).
-        ...(err._diag != null ? { provider: err._diag } : {}),
+        errorName:  err.name ?? 'Error',
+        // Hoist the three most actionable provider fields to top level so they
+        // are visible without expanding the nested provider object.
+        ...(diag?.providerStatus     != null ? { providerStatus:     diag.providerStatus }     : {}),
+        ...(diag?.providerMessage    != null ? { providerMessage:    diag.providerMessage }     : {}),
+        ...(diag?.providerErrorClass != null ? { providerErrorClass: diag.providerErrorClass }  : {}),
+        // Full nested diagnostic object for complete introspection.
+        // Includes providerStatusText, providerDetails, providerStack,
+        // and providerFeedback (on safety-block responses).
+        ...(diag != null ? { provider: diag } : {}),
       });
     } else {
       // Client-side rejections (4xx): log with warn severity
