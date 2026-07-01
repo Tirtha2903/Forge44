@@ -1,0 +1,12 @@
+{
+  "name": "forge44",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Forge44 — AI App Compiler. Turn prompts into production-grade applications.",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.21.0"
+  }
+}

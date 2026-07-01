@@ -153,7 +153,15 @@
         <button class="sample-chip" id="sampleConflict"    data-sample="conflict">Conflict Test</button>
         <button class="sample-chip" id="sampleVague"       data-sample="vague">Vague Input</button>
       </div>
+
+      <!-- Compile error bar — shown by showCompileError() when the API call fails -->
+      <div class="compile-error hidden" id="compileError" role="alert" aria-live="assertive">
+        <span class="compile-error-icon" aria-hidden="true">⚠</span>
+        <span class="compile-error-msg"  id="compileErrorMsg">Something went wrong.</span>
+        <button class="compile-error-close" id="compileErrorClose" aria-label="Dismiss error">✕</button>
+      </div>
     </div>
+
 
   </div>
 </section>

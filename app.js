@@ -1,6 +1,6 @@
-/* ================================================================
-   FORGE44 COMPILER — app.js
-   Multi-stage pipeline: Intent → Design → Schema → Refine → Validate → Repair → Runtime
+﻿/* ================================================================
+   FORGE44 COMPILER â€” app.js
+   Multi-stage pipeline: Intent â†’ Design â†’ Schema â†’ Refine â†’ Validate â†’ Repair â†’ Runtime
    ================================================================ */
 
 /* ================================================================
@@ -38,7 +38,7 @@ const evaluationPrompts = [
   "Create something.",
   "Build a marketplace without any product or payment functionality but call it a marketplace.",
   "Make a HIPAA-compliant healthcare app where patient data is publicly accessible.",
-  "Build an app with roles: god, demigod, mortal — where mortals can see god-level financial reports.",
+  "Build an app with roles: god, demigod, mortal â€” where mortals can see god-level financial reports.",
   "Create a social network where users can impersonate admins through the profile page.",
   "Build an app with 50 pages, all requiring admin access, and a guest landing page that shows all data.",
   "Make a finance app where the free plan has full analytics and the paid plan has nothing.",
@@ -46,7 +46,7 @@ const evaluationPrompts = [
 ];
 
 /* ================================================================
-   DETERMINISTIC METRIC  (replaces Math.random — consistent values)
+   DETERMINISTIC METRIC  (replaces Math.random â€” consistent values)
    ================================================================ */
 function deterministicMetric(seed, lo = 120, hi = 9800) {
   let h = 0x811c9dc5;
@@ -61,7 +61,7 @@ function deterministicChange(seed) {
   let h = 0;
   for (let c of seed) h = ((h * 31) + c.charCodeAt(0)) | 0;
   const pct  = ((Math.abs(h) % 200) + 1) / 10;
-  const sign = h < 0 ? '−' : '+';
+  const sign = h < 0 ? 'âˆ’' : '+';
   return `${sign}${pct.toFixed(1)}% vs last period`;
 }
 
@@ -72,7 +72,7 @@ function deterministicChange(seed) {
   const saved = localStorage.getItem('forge44-theme') || 'light';
   document.documentElement.setAttribute('data-theme', saved);
   const icon = document.getElementById('themeIcon');
-  if (icon) icon.textContent = saved === 'dark' ? '☀️' : '🌙';
+  if (icon) icon.textContent = saved === 'dark' ? 'â˜€ï¸' : 'ðŸŒ™';
 })();
 
 document.getElementById('themeToggle')?.addEventListener('click', () => {
@@ -80,12 +80,12 @@ document.getElementById('themeToggle')?.addEventListener('click', () => {
   const current = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
   html.setAttribute('data-theme', current);
   const icon = document.getElementById('themeIcon');
-  if (icon) icon.textContent = current === 'dark' ? '☀️' : '🌙';
+  if (icon) icon.textContent = current === 'dark' ? 'â˜€ï¸' : 'ðŸŒ™';
   localStorage.setItem('forge44-theme', current);
 });
 
 /* ================================================================
-   NAV CTA → scroll to prompt
+   NAV CTA â†’ scroll to prompt
    ================================================================ */
 document.getElementById('navCta')?.addEventListener('click', () => {
   document.getElementById('promptInput')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -181,14 +181,14 @@ function setLoading(on) {
   if (on && !document.getElementById('sendSpinner')) {
     const s = document.createElement('span');
     s.id = 'sendSpinner';
-    s.textContent = '⟳';
+    s.textContent = 'âŸ³';
     s.style.cssText = 'font-size:1rem;line-height:1;';
     btn.appendChild(s);
   } else if (!on) {
     document.getElementById('sendSpinner')?.remove();
   }
   const nav = document.getElementById('navStatus');
-  if (nav) nav.textContent = on ? 'Compiling…' : 'Ready';
+  if (nav) nav.textContent = on ? 'Compilingâ€¦' : 'Ready';
 }
 
 /* ================================================================
@@ -220,12 +220,12 @@ function startAiLog(promptText) {
   if (init) init.textContent = appName.charAt(0).toUpperCase();
   const pv = document.getElementById('aiUserPrompt');
   if (pv) pv.textContent = promptText.length > 200
-    ? promptText.slice(0, 197) + '…'
+    ? promptText.slice(0, 197) + 'â€¦'
     : promptText;
 
   // AI intro
   const intro = document.getElementById('aiIntroText');
-  if (intro) intro.textContent = `I'll build a ${appName.toLowerCase()} application. Analyzing requirements…`;
+  if (intro) intro.textContent = `I'll build a ${appName.toLowerCase()} application. Analyzing requirementsâ€¦`;
 }
 
 function guessAppName(prompt) {
@@ -256,7 +256,7 @@ function appendAiStep(verb, obj, delay) {
       item.className = 'ai-step';
       item.setAttribute('role', 'listitem');
       item.innerHTML = `
-        <span class="ai-step-icon" aria-hidden="true">✓</span>
+        <span class="ai-step-icon" aria-hidden="true">âœ“</span>
         <span class="ai-step-verb">${verb}</span>
         <span class="ai-step-obj">${obj}</span>
       `;
@@ -290,12 +290,12 @@ async function showAiSteps(result) {
   const fieldCount    = cfg.database?.tables?.reduce((n,t) => n + (t.fields?.length ?? 0), 0) ?? '?';
   const ruleCount     = cfg.business_logic?.rules?.length ?? '?';
 
-  await appendAiStep('Analyzed',    `prompt • ${featureCount} features, ${roleCount} roles detected`,                           delay); delay += STEP;
-  await appendAiStep('Designed',    `system architecture • ${entityCount} entities, ${flowCount} user flows`,                   delay); delay += STEP;
-  await appendAiStep('Wrote',       `UI config • ${pageCount} pages`,                                                           delay); delay += STEP;
-  await appendAiStep('Created',     `API schema • ${endpointCount} endpoints`,                                                  delay); delay += STEP;
-  await appendAiStep('Built',       `database • ${tableCount} tables, ${fieldCount} fields`,                                    delay); delay += STEP;
-  await appendAiStep('Configured',  `auth • ${roleCount} roles, ${r.validation?.summary?.permissions ?? '?'} permissions`,     delay); delay += STEP;
+  await appendAiStep('Analyzed',    `prompt â€¢ ${featureCount} features, ${roleCount} roles detected`,                           delay); delay += STEP;
+  await appendAiStep('Designed',    `system architecture â€¢ ${entityCount} entities, ${flowCount} user flows`,                   delay); delay += STEP;
+  await appendAiStep('Wrote',       `UI config â€¢ ${pageCount} pages`,                                                           delay); delay += STEP;
+  await appendAiStep('Created',     `API schema â€¢ ${endpointCount} endpoints`,                                                  delay); delay += STEP;
+  await appendAiStep('Built',       `database â€¢ ${tableCount} tables, ${fieldCount} fields`,                                    delay); delay += STEP;
+  await appendAiStep('Configured',  `auth â€¢ ${roleCount} roles, ${r.validation?.summary?.permissions ?? '?'} permissions`,     delay); delay += STEP;
   if (ruleCount && ruleCount !== '?') {
     await appendAiStep('Wrote', `${ruleCount} business rule${ruleCount !== 1 ? 's' : ''} (gating, validation, flow)`,           delay); delay += STEP;
   }
@@ -326,13 +326,13 @@ function updateAiBadges(result) {
 
   const bv = document.getElementById('aiBadgeVal');
   if (bv) {
-    bv.textContent = passed ? '✓ Validated' : '⚠ Issues found';
+    bv.textContent = passed ? 'âœ“ Validated' : 'âš  Issues found';
     bv.className   = `ai-badge ${passed ? 'pass' : 'warn'}`;
   }
   const br = document.getElementById('aiBadgeRun');
   if (br) {
     const runnable = result.runtime?.pages?.length > 0;
-    br.textContent = runnable ? '⚡ Executable' : '— Not runnable';
+    br.textContent = runnable ? 'âš¡ Executable' : 'â€” Not runnable';
     br.className   = `ai-badge ${runnable ? 'run' : 'warn'}`;
   }
   const brep = document.getElementById('aiBadgeRep');
@@ -394,7 +394,7 @@ function renderPipeline(stages) {
       <div class="stage-num">${String(i + 1).padStart(2, '0')}</div>
       <div class="stage-name">${s.name}</div>
       <div class="stage-detail">${s.description || ''}</div>
-      <div class="stage-ms">${s.ms != null ? s.ms + 'ms' : '—'}</div>
+      <div class="stage-ms">${s.ms != null ? s.ms + 'ms' : 'â€”'}</div>
     `;
     container.appendChild(el);
   });
@@ -407,7 +407,7 @@ function renderRuntime(runtime, config) {
   const container = document.getElementById('appPreview');
   if (!container) return;
   if (!runtime?.pages?.length) {
-    container.innerHTML = `<div class="preview-empty"><div class="preview-empty-icon">🚫</div><p class="preview-empty-text">No runnable pages generated</p></div>`;
+    container.innerHTML = `<div class="preview-empty"><div class="preview-empty-icon">ðŸš«</div><p class="preview-empty-text">No runnable pages generated</p></div>`;
     return;
   }
 
@@ -427,7 +427,7 @@ function renderRuntime(runtime, config) {
   frame.innerHTML = `
     <nav class="pf-nav" aria-label="App navigation">
       <div class="pf-nav-brand">
-        <div class="pf-nav-icon" aria-hidden="true">🔥</div>
+        <div class="pf-nav-icon" aria-hidden="true">ðŸ”¥</div>
         <span class="pf-nav-name">${escHtml(appName)}</span>
       </div>
       ${navItems}
@@ -524,7 +524,7 @@ function renderComponent(item, config, appName) {
     body = fields.map(f => `
       <div class="mini-field">
         <label class="mini-field-label">${escHtml(f)}</label>
-        <div class="mini-field-input">${f.toLowerCase().includes('email') ? 'user@example.com' : f.toLowerCase().includes('name') ? 'Enter name…' : '—'}</div>
+        <div class="mini-field-input">${f.toLowerCase().includes('email') ? 'user@example.com' : f.toLowerCase().includes('name') ? 'Enter nameâ€¦' : 'â€”'}</div>
       </div>
     `).join('');
   } else {
@@ -632,10 +632,10 @@ function renderValidation(result) {
   if (!v) { el.innerHTML = '<div class="validation-inner"><p>No validation data.</p></div>'; return; }
 
   const sumItems = [
-    { label:'Tables',     value: v.summary?.tables     ?? '—', cls: '' },
-    { label:'Endpoints',  value: v.summary?.endpoints  ?? '—', cls: '' },
-    { label:'Pages',      value: v.summary?.pages      ?? '—', cls: '' },
-    { label:'Quality',    value: (v.qualityScore ?? '—') + (v.qualityScore != null ? '%' : ''), cls: v.passed ? 'is-pass' : 'is-fail' },
+    { label:'Tables',     value: v.summary?.tables     ?? 'â€”', cls: '' },
+    { label:'Endpoints',  value: v.summary?.endpoints  ?? 'â€”', cls: '' },
+    { label:'Pages',      value: v.summary?.pages      ?? 'â€”', cls: '' },
+    { label:'Quality',    value: (v.qualityScore ?? 'â€”') + (v.qualityScore != null ? '%' : ''), cls: v.passed ? 'is-pass' : 'is-fail' },
   ];
 
   const summaryHtml = sumItems.map(s => `
@@ -653,14 +653,14 @@ function renderValidation(result) {
         return `
           <div class="issue-item ${sevLabel}-item">
             <div class="issue-body">
-              <div class="issue-title">${escHtml(iss.layer || '')} — ${escHtml(iss.check || iss.rule || '')}</div>
+              <div class="issue-title">${escHtml(iss.layer || '')} â€” ${escHtml(iss.check || iss.rule || '')}</div>
               <div class="issue-msg">${escHtml(iss.message || '')}</div>
             </div>
             <span class="status-pill ${sevLabel}">${sevLabel.toUpperCase()}</span>
           </div>
         `;
       }).join('')
-    : '<p style="font-size:.82rem;color:var(--text-3);padding:8px 0">No issues found — all contracts pass.</p>';
+    : '<p style="font-size:.82rem;color:var(--text-3);padding:8px 0">No issues found â€” all contracts pass.</p>';
 
   el.innerHTML = `
     <div class="validation-inner">
@@ -669,7 +669,7 @@ function renderValidation(result) {
       ${result.repair?.loops > 0 ? `
         <details style="margin-top:20px">
           <summary style="cursor:pointer;font-size:.8rem;font-weight:600;color:var(--repair)">
-            ▸ Repair log (${result.repair.loops} loop${result.repair.loops>1?'s':''})
+            â–¸ Repair log (${result.repair.loops} loop${result.repair.loops>1?'s':''})
           </summary>
           <div style="margin-top:10px;display:flex;flex-direction:column;gap:5px">
             ${(result.repair.log||[]).map(l => `
@@ -691,13 +691,18 @@ function renderValidation(result) {
 /* ================================================================
    EVALUATION RUNNER
    ================================================================ */
-document.getElementById('runEvaluation')?.addEventListener('click', runEvaluation);
+document.getElementById('runEvaluation')?.addEventListener('click', () => {
+  const confirmed = confirm(
+    'Running the benchmark will make 20 real AI API calls and may take 2â€“5 minutes.\n\nProceed?'
+  );
+  if (confirmed) runEvaluation();
+});
 
 async function runEvaluation() {
   const btn = document.getElementById('runEvaluation');
-  if (btn) { btn.disabled = true; btn.textContent = '⟳ Running…'; }
+  if (btn) { btn.disabled = true; btn.textContent = 'âŸ³ Runningâ€¦'; }
   const report = document.getElementById('evaluationReport');
-  if (report) report.innerHTML = '<div class="empty-state"><div class="empty-icon">⟳</div><p class="empty-title">Running 20 prompts…</p></div>';
+  if (report) report.innerHTML = '<div class="empty-state"><div class="empty-icon">âŸ³</div><p class="empty-title">Running 20 promptsâ€¦</p></div>';
 
   const results = [];
   const t0 = performance.now();
@@ -720,7 +725,7 @@ async function runEvaluation() {
   const avgMs   = Math.round(results.reduce((s,r) => s+r.ms, 0) / results.length);
 
   renderEvaluation(results, { total, passing, avgQ, totRep, avgMs });
-  if (btn) { btn.disabled = false; btn.textContent = '▶ Run 20 Prompts'; }
+  if (btn) { btn.disabled = false; btn.textContent = 'â–¶ Run 20 Prompts'; }
 }
 
 function renderEvaluation(rows, summary) {
@@ -747,7 +752,7 @@ function renderEvaluation(rows, summary) {
         <span class="status-pill ${r.passed?'pass':'fail'}" style="flex-shrink:0">
           ${r.passed ? 'PASS' : 'FAIL'}
         </span>
-        <span class="eval-row-prompt" title="${escHtml(r.prompt)}">${escHtml(r.prompt.slice(0,72))}…</span>
+        <span class="eval-row-prompt" title="${escHtml(r.prompt)}">${escHtml(r.prompt.slice(0,72))}â€¦</span>
         <div class="eval-row-meta">
           <span class="eval-meta-chip">${cat}</span>
           <span class="eval-meta-chip">${r.quality}%</span>
@@ -802,7 +807,7 @@ document.getElementById('promptInput')?.addEventListener('keydown', e => {
 });
 
 async function compile() {
-  const ta = document.getElementById('promptInput');
+  const ta     = document.getElementById('promptInput');
   const prompt = (ta?.value || '').trim();
   if (!prompt) {
     ta?.focus();
@@ -810,6 +815,7 @@ async function compile() {
     setTimeout(() => ta?.classList.remove('error-shake'), 600);
     return;
   }
+  hideCompileError();
   setLoading(true);
   clearAiLog();
   startAiLog(prompt);
@@ -818,9 +824,8 @@ async function compile() {
     renderAll(result);
     await showAiSteps(result);
   } catch (err) {
-    console.error('Compile error:', err);
-    const nav = document.getElementById('navStatus');
-    if (nav) nav.textContent = 'Error';
+    console.error('[compile] Error:', err.status ?? 0, err.message);
+    showCompileError(err.message || 'Compilation failed. Please try again.');
   } finally {
     setLoading(false);
   }
@@ -837,791 +842,150 @@ function escHtml(str) {
 
 function pageIcon(name) {
   const n = name.toLowerCase();
-  if (n.includes('dashboard')  || n.includes('home'))      return '⊞';
-  if (n.includes('user')       || n.includes('people'))    return '👤';
-  if (n.includes('contact'))                               return '📋';
-  if (n.includes('analytic')   || n.includes('report'))   return '📊';
-  if (n.includes('setting'))                               return '⚙';
-  if (n.includes('payment')    || n.includes('billing'))  return '💳';
-  if (n.includes('product')    || n.includes('catalog'))  return '📦';
-  if (n.includes('order'))                                 return '🛒';
-  if (n.includes('login')      || n.includes('auth'))     return '🔑';
-  if (n.includes('admin'))                                 return '🛡';
-  if (n.includes('message')    || n.includes('chat'))     return '💬';
-  if (n.includes('notification'))                         return '🔔';
-  if (n.includes('profile'))                               return '🪪';
-  return '▸';
+  if (n.includes('dashboard')  || n.includes('home'))      return 'âŠž';
+  if (n.includes('user')       || n.includes('people'))    return 'ðŸ‘¤';
+  if (n.includes('contact'))                               return 'ðŸ“‹';
+  if (n.includes('analytic')   || n.includes('report'))   return 'ðŸ“Š';
+  if (n.includes('setting'))                               return 'âš™';
+  if (n.includes('payment')    || n.includes('billing'))  return 'ðŸ’³';
+  if (n.includes('product')    || n.includes('catalog'))  return 'ðŸ“¦';
+  if (n.includes('order'))                                 return 'ðŸ›’';
+  if (n.includes('login')      || n.includes('auth'))     return 'ðŸ”‘';
+  if (n.includes('admin'))                                 return 'ðŸ›¡';
+  if (n.includes('message')    || n.includes('chat'))     return 'ðŸ’¬';
+  if (n.includes('notification'))                         return 'ðŸ””';
+  if (n.includes('profile'))                               return 'ðŸªª';
+  return 'â–¸';
 }
 
 /* ================================================================
-   ================================================================
-   CORE PIPELINE LOGIC — ALL STAGES PRESERVED EXACTLY
-   ================================================================
+   COMPILE API CLIENT
    ================================================================ */
 
-/* ================================================================
-   STAGE 1 — INTENT EXTRACTION
-   ================================================================ */
-function extractIntent(prompt) {
-  const p = prompt.toLowerCase();
-
-  // Feature detection
-  const featureKeywords = {
-    login:         ['login','auth','sign in','signup','sign up','register','authentication','sso','oauth'],
-    contacts:      ['contact','people','person','client','customer','lead','prospect'],
-    dashboard:     ['dashboard','overview','home','main page','landing','metrics','kpi'],
-    analytics:     ['analytics','report','reporting','stats','statistics','insights','charts','graphs'],
-    payments:      ['payment','billing','subscription','stripe','invoice','checkout','pricing','plan','monetiz'],
-    roles:         ['role','permission','access control','rbac','admin','manager','staff','employee','member'],
-    crm:           ['crm','deal','pipeline','opportunity','sales rep','account'],
-    marketplace:   ['marketplace','listing','seller','buyer','vendor','tutor','student','two-sided'],
-    calendar:      ['calendar','schedule','appointment','booking','availability','slot','time slot'],
-    notifications: ['notification','alert','reminder','email','sms','push'],
-    files:         ['file','upload','document','attachment','storage','image','media'],
-    api:           ['api','webhook','integration','rest','graphql','endpoint'],
-    comments:      ['comment','discussion','thread','reply','feedback','review'],
-    search:        ['search','filter','sort','query','find'],
-    premium:       ['premium','pro','enterprise','upgrade','paid plan','free plan','feature flag'],
-    audit:         ['audit','log','history','activity','trail','track'],
-    payroll:       ['payroll','salary','wage','compensation'],
-    inventory:     ['inventory','stock','warehouse','product catalog','sku'],
-    orders:        ['order','purchase','transaction','cart'],
-    approval:      ['approval','workflow','sign-off','authorize','request'],
-  };
-
-  const features = [];
-  for (const [feat, kws] of Object.entries(featureKeywords)) {
-    if (kws.some(kw => p.includes(kw))) features.push(feat);
-  }
-  if (!features.length) features.push('dashboard', 'users');
-
-  // Role detection
-  const rolePatterns = [
-    { role: 'admin',      kws: ['admin','administrator','superuser','super user'] },
-    { role: 'manager',    kws: ['manager','supervisor','lead','team lead'] },
-    { role: 'sales_rep',  kws: ['sales rep','sales representative','salesperson'] },
-    { role: 'tutor',      kws: ['tutor','instructor','teacher','educator','trainer'] },
-    { role: 'student',    kws: ['student','learner','pupil'] },
-    { role: 'seller',     kws: ['seller','vendor','merchant'] },
-    { role: 'buyer',      kws: ['buyer','shopper','purchaser'] },
-    { role: 'doctor',     kws: ['doctor','physician','clinician','specialist'] },
-    { role: 'patient',    kws: ['patient','appointee'] },
-    { role: 'employee',   kws: ['employee','staff','worker','team member'] },
-    { role: 'accountant', kws: ['accountant','finance','payroll'] },
-    { role: 'guest',      kws: ['guest','visitor','public','unauthenticated'] },
-    { role: 'premium',    kws: ['premium user','pro user','paid user','subscriber'] },
-    { role: 'warehouse',  kws: ['warehouse','stock manager','inventory manager'] },
-  ];
-  const roles = ['user'];
-  for (const { role, kws } of rolePatterns) {
-    if (kws.some(kw => p.includes(kw)) && !roles.includes(role)) roles.push(role);
-  }
-  if (!roles.includes('admin')) roles.push('admin');
-
-  // Conflict signals
-  const conflictSignals = [];
-  if (p.includes('guest') && (p.includes('all') || p.includes('private') || p.includes('admin'))) {
-    conflictSignals.push({ type:'ACCESS_CONFLICT', message:'Guest may access restricted data' });
-  }
-  if ((p.includes('public') || p.includes('everyone')) &&
-      (p.includes('private') || p.includes('confidential') || p.includes('payroll') || p.includes('salary'))) {
-    conflictSignals.push({ type:'PRIVACY_CONFLICT', message:'Public access to private data' });
-  }
-  if (p.includes('impersonat')) {
-    conflictSignals.push({ type:'SECURITY_CONFLICT', message:'Impersonation vulnerability detected' });
-  }
-
-  // Domain detection
-  let domain = 'General';
-  const domains = {
-    'CRM':        ['crm','deal','pipeline','sales rep'],
-    'Marketplace':['marketplace','tutor','seller','vendor','two-sided'],
-    'E-Commerce': ['ecommerce','shop','product','order','cart','inventory'],
-    'Healthcare': ['doctor','patient','clinic','hipaa','medical','health'],
-    'HR':         ['hr','human resource','payroll','leave','employee','org chart'],
-    'Finance':    ['finance','payroll','invoice','billing','accounting'],
-    'Education':  ['lms','learning','course','student','assignment','grade'],
-    'Real Estate':['real estate','property','listing','agent'],
-    'Logistics':  ['food delivery','driver','restaurant','order tracking'],
-    'Legal':      ['legal','case','matter','attorney','law'],
-    'Analytics':  ['analytics','saas','metrics','funnel','a/b test'],
-    'Social':     ['social network','feed','follower','post','like'],
-    'Project':    ['project management','task','kanban','sprint','milestone'],
-  };
-  for (const [d, kws] of Object.entries(domains)) {
-    if (kws.some(kw => p.includes(kw))) { domain = d; break; }
-  }
-
-  // Vagueness score
-  const vaguenessScore = prompt.split(' ').length < 12 ? 3
-    : features.length < 3 ? 2
-    : roles.length < 2 ? 1 : 0;
-
-  return { features, roles, domain, conflictSignals, vaguenessScore, raw: prompt };
-}
-
-/* ================================================================
-   STAGE 2 — SYSTEM ARCHITECTURE
-   ================================================================ */
-function designArchitecture(intent) {
-  const { features, roles, domain } = intent;
-
-  // Entity mapping
-  const entityMap = {
-    login:        { entity:'User',        fields:['id','email','password_hash','role','created_at','last_login'] },
-    contacts:     { entity:'Contact',     fields:['id','name','email','phone','company_id','owner_id','status','created_at'] },
-    dashboard:    { entity:'Dashboard',   fields:['id','user_id','widgets','last_viewed'] },
-    analytics:    { entity:'AnalyticEvent', fields:['id','user_id','event_type','payload','created_at'] },
-    payments:     { entity:'Payment',     fields:['id','user_id','amount','currency','status','plan','created_at'] },
-    crm:          { entity:'Deal',        fields:['id','contact_id','owner_id','value','stage','close_date'] },
-    marketplace:  { entity:'Listing',     fields:['id','seller_id','title','description','price','status','created_at'] },
-    calendar:     { entity:'Appointment', fields:['id','provider_id','client_id','datetime','duration','status'] },
-    files:        { entity:'File',        fields:['id','owner_id','name','size','mime_type','url','created_at'] },
-    comments:     { entity:'Comment',     fields:['id','author_id','entity_id','entity_type','body','created_at'] },
-    premium:      { entity:'Subscription',fields:['id','user_id','plan','status','expires_at','stripe_id'] },
-    payroll:      { entity:'Payroll',     fields:['id','employee_id','amount','pay_period','status','approved_by'] },
-    inventory:    { entity:'Product',     fields:['id','name','sku','quantity','price','category','warehouse_id'] },
-    orders:       { entity:'Order',       fields:['id','customer_id','items','total','status','payment_id','created_at'] },
-    approval:     { entity:'ApprovalRequest', fields:['id','requester_id','approver_id','entity','status','note','created_at'] },
-    audit:        { entity:'AuditLog',    fields:['id','actor_id','action','entity_type','entity_id','ip','created_at'] },
-  };
-
-  const entities = [];
-  const seen = new Set();
-  for (const feat of features) {
-    const e = entityMap[feat];
-    if (e && !seen.has(e.entity)) { entities.push(e); seen.add(e.entity); }
-  }
-  if (!seen.has('User')) {
-    entities.unshift({ entity:'User', fields:['id','email','password_hash','role','created_at'] });
-  }
-
-  // Flow mapping
-  const flowMap = {
-    login:      ['User authentication & session management','Password reset flow'],
-    payments:   ['Subscription lifecycle','Payment webhook processing','Plan upgrade / downgrade'],
-    marketplace:['Listing approval pipeline','Search & discovery','Booking / transaction flow'],
-    approval:   ['Multi-step approval routing','Notification triggers'],
-    calendar:   ['Availability calculation','Reminder dispatch'],
-    audit:      ['Event capture on every write','Tamper-evident log export'],
-  };
-
-  const flows = [];
-  for (const feat of features) {
-    if (flowMap[feat]) flows.push(...flowMap[feat]);
-  }
-  if (!flows.length) flows.push('CRUD operations', 'Role-based data scoping');
-
-  // Permission matrix
-  const permMatrix = {};
-  for (const role of roles) {
-    permMatrix[role] = {
-      read:  role === 'guest' ? ['public_listings','public_profile'] : ['*'],
-      write: ['admin','manager'].includes(role) ? ['*'] : ['own_data', 'assigned_records'],
-      delete:['admin'].includes(role) ? ['*'] : [],
-    };
-  }
-
-  return {
-    entities,
-    flows: [...new Set(flows)],
-    permissionMatrix: permMatrix,
-    scalabilityNotes: [
-      'Index foreign keys and frequently queried columns',
-      'Paginate all list endpoints (default limit: 50)',
-      domain !== 'General' ? `${domain}-specific rate limiting on sensitive endpoints` : null,
-    ].filter(Boolean),
-  };
-}
-
-/* ================================================================
-   STAGE 3 — SCHEMA GENERATION
-   ================================================================ */
-function generateSchemas(intent, architecture) {
-  const { features, roles, domain, conflictSignals } = intent;
-  const { entities, flows, permissionMatrix } = architecture;
-
-  /* --- UI SCHEMA --- */
-  const pageMap = {
-    login:        { name:'Login',         route:'/login',         roles:['guest'], comps:[
-      { type:'form', title:'Sign In', fields:['Email','Password'], endpoint:'/api/auth/login' },
-    ]},
-    dashboard:    { name:'Dashboard',     route:'/dashboard',     roles:['user','admin','manager'], comps:[
-      { type:'metric', title:'Total Users',   endpoint:'/api/stats/users' },
-      { type:'metric', title:'Active Records',endpoint:'/api/stats/records' },
-      { type:'chart',  title:'Activity Trend',endpoint:'/api/stats/trend' },
-    ]},
-    contacts:     { name:'Contacts',      route:'/contacts',      roles:['user','admin','sales_rep'], comps:[
-      { type:'table',  title:'Contact List', fields:['Name','Company','Status','Owner'], endpoint:'/api/contacts' },
-    ]},
-    analytics:    { name:'Analytics',     route:'/analytics',     roles:['admin','manager'], comps:[
-      { type:'chart',  title:'Revenue Trend',   endpoint:'/api/analytics/revenue' },
-      { type:'chart',  title:'User Growth',     endpoint:'/api/analytics/users' },
-      { type:'metric', title:'Conversion Rate', endpoint:'/api/analytics/conversion' },
-    ]},
-    payments:     { name:'Billing',       route:'/billing',       roles:['user','admin'], comps:[
-      { type:'metric', title:'MRR',           endpoint:'/api/billing/mrr' },
-      { type:'table',  title:'Invoices',      fields:['Date','Amount','Status','Plan'], endpoint:'/api/billing/invoices' },
-    ]},
-    crm:          { name:'Deals',         route:'/deals',         roles:['user','admin','sales_rep'], comps:[
-      { type:'table',  title:'Deal Pipeline', fields:['Deal','Contact','Value','Stage','Close Date'], endpoint:'/api/deals' },
-      { type:'metric', title:'Pipeline Value',endpoint:'/api/deals/stats' },
-    ]},
-    marketplace:  { name:'Listings',      route:'/listings',      roles:['user','admin','seller'], comps:[
-      { type:'table',  title:'All Listings',  fields:['Title','Seller','Price','Status'], endpoint:'/api/listings' },
-      { type:'metric', title:'Active Listings',endpoint:'/api/listings/stats' },
-    ]},
-    calendar:     { name:'Schedule',      route:'/schedule',      roles:['user','admin'], comps:[
-      { type:'table',  title:'Appointments',  fields:['Date','Time','Provider','Status'], endpoint:'/api/appointments' },
-    ]},
-    premium:      { name:'Plans',         route:'/plans',         roles:['user'], comps:[
-      { type:'form',   title:'Upgrade Plan',  fields:['Plan','Card Number','Expiry','CVV'], endpoint:'/api/subscriptions' },
-    ]},
-    payroll:      { name:'Payroll',       route:'/payroll',       roles:['admin','accountant'], comps:[
-      { type:'table',  title:'Payroll Records',fields:['Employee','Period','Amount','Status'], endpoint:'/api/payroll' },
-    ]},
-    inventory:    { name:'Inventory',     route:'/inventory',     roles:['admin','warehouse'], comps:[
-      { type:'table',  title:'Products',      fields:['SKU','Name','Stock','Price','Warehouse'], endpoint:'/api/products' },
-      { type:'metric', title:'Low Stock Items',endpoint:'/api/products/low-stock' },
-    ]},
-    orders:       { name:'Orders',        route:'/orders',        roles:['admin','manager'], comps:[
-      { type:'table',  title:'Order Queue',   fields:['Order ID','Customer','Total','Status'], endpoint:'/api/orders' },
-      { type:'metric', title:'Pending Orders',endpoint:'/api/orders/pending' },
-    ]},
-    approval:     { name:'Approvals',     route:'/approvals',     roles:['admin','manager'], comps:[
-      { type:'table',  title:'Pending Requests',fields:['Requester','Type','Date','Status'], endpoint:'/api/approvals' },
-    ]},
-    files:        { name:'Documents',     route:'/documents',     roles:['user','admin'], comps:[
-      { type:'table',  title:'File Manager',  fields:['Name','Size','Type','Uploaded'], endpoint:'/api/files' },
-    ]},
-    audit:        { name:'Audit Log',     route:'/audit',         roles:['admin'], comps:[
-      { type:'table',  title:'Activity Log',  fields:['Time','Actor','Action','Entity'], endpoint:'/api/audit' },
-    ]},
-  };
-
-  const adminPage = {
-    name:'Admin', route:'/admin',
-    roles:['admin'],
-    comps:[
-      { type:'metric', title:'Total Users',     endpoint:'/api/admin/users/count' },
-      { type:'metric', title:'System Health',   endpoint:'/api/admin/health' },
-      { type:'table',  title:'All Users',        fields:['Name','Email','Role','Status'], endpoint:'/api/admin/users' },
-    ],
-  };
-
-  const pages = [];
-  const addedPages = new Set();
-  for (const feat of features) {
-    if (pageMap[feat] && !addedPages.has(feat)) {
-      pages.push(pageMap[feat]);
-      addedPages.add(feat);
-    }
-  }
-  if (roles.includes('admin') && !addedPages.has('admin')) pages.push(adminPage);
-
-  /* --- API SCHEMA --- */
-  const endpointMap = {
-    login:       [
-      { method:'POST',   path:'/api/auth/login',        roles:['guest','user'],  description:'Authenticate user' },
-      { method:'POST',   path:'/api/auth/logout',       roles:['user'],          description:'Invalidate session' },
-      { method:'POST',   path:'/api/auth/refresh',      roles:['user'],          description:'Refresh access token' },
-    ],
-    contacts:    [
-      { method:'GET',    path:'/api/contacts',           roles:['user','admin'],  description:'List contacts (scoped)' },
-      { method:'POST',   path:'/api/contacts',           roles:['user','admin'],  description:'Create contact' },
-      { method:'GET',    path:'/api/contacts/:id',       roles:['user','admin'],  description:'Get contact detail' },
-      { method:'PUT',    path:'/api/contacts/:id',       roles:['user','admin'],  description:'Update contact' },
-      { method:'DELETE', path:'/api/contacts/:id',       roles:['admin'],         description:'Delete contact (admin only)' },
-    ],
-    analytics:   [
-      { method:'GET',    path:'/api/analytics/revenue',  roles:['admin','manager'],description:'Revenue data' },
-      { method:'GET',    path:'/api/analytics/users',    roles:['admin'],          description:'User growth' },
-      { method:'GET',    path:'/api/analytics/conversion',roles:['admin'],         description:'Conversion metrics' },
-    ],
-    payments:    [
-      { method:'GET',    path:'/api/billing/invoices',   roles:['user','admin'],  description:'List invoices' },
-      { method:'POST',   path:'/api/subscriptions',      roles:['user'],          description:'Create subscription' },
-      { method:'GET',    path:'/api/billing/mrr',        roles:['admin'],         description:'MRR stats (admin only)' },
-    ],
-    crm:         [
-      { method:'GET',    path:'/api/deals',              roles:['user','admin','sales_rep'],description:'Pipeline deals' },
-      { method:'POST',   path:'/api/deals',              roles:['user','sales_rep'],        description:'Create deal' },
-      { method:'PUT',    path:'/api/deals/:id',          roles:['user','admin'],            description:'Update deal' },
-    ],
-    marketplace: [
-      { method:'GET',    path:'/api/listings',           roles:['*'],             description:'Browse listings' },
-      { method:'POST',   path:'/api/listings',           roles:['seller','tutor'],description:'Create listing' },
-      { method:'PUT',    path:'/api/listings/:id/approve',roles:['admin'],        description:'Approve listing' },
-    ],
-    calendar:    [
-      { method:'GET',    path:'/api/appointments',       roles:['user','admin'],  description:'List appointments' },
-      { method:'POST',   path:'/api/appointments',       roles:['user'],          description:'Book appointment' },
-    ],
-    payroll:     [
-      { method:'GET',    path:'/api/payroll',            roles:['admin','accountant'],description:'Payroll records' },
-      { method:'POST',   path:'/api/payroll/run',        roles:['admin'],         description:'Run payroll' },
-    ],
-    inventory:   [
-      { method:'GET',    path:'/api/products',           roles:['admin','warehouse'],description:'Product list' },
-      { method:'POST',   path:'/api/products',           roles:['admin'],         description:'Add product' },
-      { method:'PUT',    path:'/api/products/:id/stock', roles:['admin','warehouse'],description:'Update stock' },
-    ],
-    orders:      [
-      { method:'GET',    path:'/api/orders',             roles:['admin','manager'],description:'All orders' },
-      { method:'GET',    path:'/api/orders/pending',     roles:['admin','manager'],description:'Pending orders' },
-      { method:'PUT',    path:'/api/orders/:id/status',  roles:['admin'],         description:'Update order status' },
-    ],
-    approval:    [
-      { method:'GET',    path:'/api/approvals',          roles:['admin','manager'],description:'Pending approvals' },
-      { method:'POST',   path:'/api/approvals/:id/approve',roles:['admin','manager'],description:'Approve request' },
-      { method:'POST',   path:'/api/approvals/:id/reject',roles:['admin','manager'],description:'Reject request' },
-    ],
-    audit:       [
-      { method:'GET',    path:'/api/audit',              roles:['admin'],         description:'Audit log' },
-    ],
-    files:       [
-      { method:'GET',    path:'/api/files',              roles:['user','admin'],  description:'List files' },
-      { method:'POST',   path:'/api/files/upload',       roles:['user','admin'],  description:'Upload file' },
-      { method:'DELETE', path:'/api/files/:id',          roles:['admin'],         description:'Delete file' },
-    ],
-    premium:     [
-      { method:'GET',    path:'/api/subscriptions/me',   roles:['user'],          description:'Current subscription' },
-      { method:'POST',   path:'/api/subscriptions/upgrade',roles:['user'],        description:'Upgrade plan' },
-      { method:'GET',    path:'/api/subscriptions/all',  roles:['admin'],         description:'All subscriptions (admin)' },
-    ],
-  };
-
-  const userEndpoints = [
-    { method:'GET',    path:'/api/users/me',             roles:['user'],          description:'Current user profile' },
-    { method:'PUT',    path:'/api/users/me',             roles:['user'],          description:'Update own profile' },
-    { method:'GET',    path:'/api/admin/users',          roles:['admin'],         description:'All users (admin)' },
-    { method:'PUT',    path:'/api/admin/users/:id/role', roles:['admin'],         description:'Change user role' },
-    { method:'GET',    path:'/api/admin/users/count',    roles:['admin'],         description:'User count stat' },
-    { method:'GET',    path:'/api/stats/users',          roles:['admin','manager'],description:'Stats: user count' },
-    { method:'GET',    path:'/api/stats/records',        roles:['user','admin'],  description:'Stats: record count' },
-    { method:'GET',    path:'/api/stats/trend',          roles:['user','admin'],  description:'Stats: activity trend' },
-  ];
-
-  const endpoints = [...userEndpoints];
-  const addedEps = new Set();
-  for (const feat of features) {
-    if (endpointMap[feat]) {
-      for (const ep of endpointMap[feat]) {
-        const key = ep.method + ep.path;
-        if (!addedEps.has(key)) { endpoints.push(ep); addedEps.add(key); }
-      }
-    }
-  }
-
-  /* --- DATABASE SCHEMA --- */
-  const tables = entities.map(e => ({
-    name:   e.entity,
-    fields: e.fields,
-    indexes: e.fields.filter(f => f.endsWith('_id') || f === 'email' || f === 'status'),
-  }));
-
-  /* --- AUTH SCHEMA --- */
-  const authSchema = {
-    provider: 'JWT + RefreshToken',
-    session_strategy: 'sliding_window_15m_access_7d_refresh',
-    roles: roles.map(r => ({
-      name: r,
-      inherits: r === 'admin' ? [] : ['user'],
-      permissions: permissionMatrix[r] || { read:['own_data'], write:['own_data'], delete:[] },
-    })),
-    guards: [
-      'Validate JWT on every protected route',
-      'Enforce role membership before handler',
-      'Log auth failures to audit table',
-    ],
-  };
-
-  /* --- BUSINESS LOGIC --- */
-  const rules = [];
-  if (features.includes('premium') && features.includes('analytics')) {
-    rules.push({ rule:'PREMIUM_GATE_ANALYTICS', description:'Analytics routes require active premium subscription', enforce:'middleware' });
-  }
-  if (features.includes('payroll')) {
-    rules.push({ rule:'PAYROLL_ADMIN_ONLY', description:'Payroll data accessible only by admin and accountant roles', enforce:'row_policy' });
-  }
-  if (features.includes('marketplace')) {
-    rules.push({ rule:'LISTING_APPROVAL_REQUIRED', description:'Listings are hidden until admin approves them', enforce:'status_field' });
-  }
-  if (conflictSignals.some(c => c.type === 'ACCESS_CONFLICT' || c.type === 'PRIVACY_CONFLICT')) {
-    rules.push({ rule:'PRIVACY_HARD_BLOCK', description:'Deny any read of private/confidential data to guest/public roles', enforce:'policy_middleware' });
-  }
-  if (features.includes('approval')) {
-    rules.push({ rule:'APPROVAL_CHAIN', description:'Requests must pass through manager→admin chain before write-back', enforce:'workflow_engine' });
-  }
-
-  const policyDecisions = [];
-  for (const signal of conflictSignals) {
-    policyDecisions.push({
-      signal:   signal.type,
-      decision: 'DENY_AND_ENFORCE',
-      note:     `Conflict "${signal.message}" overridden. Strict deny policy applied.`,
-    });
-  }
-
-  return {
-    app: {
-      name:   domainToName(domain),
-      domain,
-      version:'1.0.0',
-      generated_by:'forge44-compiler',
-      generated_at: new Date().toISOString(),
-      policy_decisions: policyDecisions,
-    },
-    ui:             { pages },
-    api:            { endpoints },
-    database:       { tables },
-    auth:           authSchema,
-    business_logic: { rules },
-  };
-}
-
-function domainToName(domain) {
-  const map = {
-    'CRM':'CRM System','Marketplace':'Marketplace','E-Commerce':'E-Commerce Admin',
-    'Healthcare':'Clinic Manager','HR':'HR Platform','Finance':'Finance Dashboard',
-    'Education':'LMS Platform','Real Estate':'Realty Platform','Logistics':'Delivery Admin',
-    'Legal':'Case Manager','Analytics':'Analytics Hub','Social':'Social Network',
-    'Project':'Project Tool','General':'Business App',
-  };
-  return map[domain] || domain + ' App';
-}
-
-/* ================================================================
-   STAGE 4 — REFINEMENT
-   ================================================================ */
-function refineConfig(config, intent) {
-  const { conflictSignals, roles } = intent;
-
-  // Enforce that no endpoint granting excessive guest permissions
-  config.api.endpoints = config.api.endpoints.map(ep => {
-    if (ep.roles.includes('*') && ep.path.includes('/admin')) {
-      return { ...ep, roles: ['admin'], _refined:'admin-only enforced' };
-    }
-    if (ep.roles.includes('*') && ep.path.includes('/payroll')) {
-      return { ...ep, roles: ['admin','accountant'], _refined:'payroll restricted' };
-    }
-    return ep;
-  });
-
-  // Close privacy conflicts
-  for (const sig of conflictSignals) {
-    if (sig.type === 'PRIVACY_CONFLICT' || sig.type === 'ACCESS_CONFLICT') {
-      config.ui.pages = config.ui.pages.map(page => {
-        const badRoles = ['guest','public'];
-        if (page.roles.some(r => badRoles.includes(r)) &&
-            page.name.toLowerCase().match(/payroll|analytic|admin|private/)) {
-          return { ...page, roles: page.roles.filter(r => !badRoles.includes(r)), _refined:'guest removed' };
-        }
-        return page;
-      });
-    }
-    if (sig.type === 'SECURITY_CONFLICT') {
-      config.auth.guards.push('Prevent role escalation via profile mutation — validate server-side');
-    }
-  }
-
-  // Add vague-input defaults
-  if (intent.vaguenessScore >= 3) {
-    config.app.note = 'Prompt was vague — sensible defaults applied. Review generated schema.';
-    if (!config.ui.pages.some(p => p.name === 'Dashboard')) {
-      config.ui.pages.unshift({
-        name:'Dashboard', route:'/dashboard', roles:['user','admin'],
-        comps:[{ type:'metric', title:'Records', endpoint:'/api/stats/records' }],
-      });
-    }
-  }
-
-  return config;
-}
-
-/* ================================================================
-   STAGE 5 — VALIDATION (full cross-layer)
-   ================================================================ */
-function validateConfig(config) {
-  const issues = [];
-  let qualityScore = 100;
-  let permissions = 0;
-
-  // Count permissions
-  for (const role of config.auth?.roles ?? []) {
-    permissions += (role.permissions?.read?.length ?? 0) +
-                   (role.permissions?.write?.length ?? 0) +
-                   (role.permissions?.delete?.length ?? 0);
-  }
-
-  const apiRoles = new Set(config.api.endpoints.flatMap(e => e.roles));
-  const authRoleNames = new Set(config.auth.roles.map(r => r.name));
-
-  // 1. Orphaned API roles
-  for (const r of apiRoles) {
-    if (r !== '*' && !authRoleNames.has(r)) {
-      issues.push({ layer:'API↔Auth', check:'ORPHAN_ROLE', severity:'error',
-        message:`Role "${r}" referenced in API endpoints but not defined in auth config.` });
-      qualityScore -= 12;
-    }
-  }
-
-  // 2. Page role coverage
-  for (const page of config.ui.pages) {
-    for (const r of page.roles) {
-      if (!authRoleNames.has(r) && r !== 'guest') {
-        issues.push({ layer:'UI↔Auth', check:'UNDEFINED_PAGE_ROLE', severity:'warning',
-          message:`Page "${page.name}" allows role "${r}" which is not in auth config.` });
-        qualityScore -= 6;
-      }
-    }
-  }
-
-  // 3. Endpoint coverage — each page component should have a backing endpoint
-  const endpointPaths = new Set(config.api.endpoints.map(e => e.path));
-  for (const page of config.ui.pages) {
-    for (const comp of (page.components ?? page.comps ?? [])) {
-      if (comp.endpoint && !endpointPaths.has(comp.endpoint)) {
-        const similar = [...endpointPaths].find(p => p.includes(comp.endpoint.split('/')[2]));
-        issues.push({
-          layer:'UI↔API', check:'MISSING_ENDPOINT', severity: similar ? 'warning' : 'error',
-          message:`Component "${comp.title}" on "${page.name}" references ${comp.endpoint} — ${similar ? `similar: ${similar}` : 'no match found'}.`
-        });
-        qualityScore -= similar ? 4 : 10;
-      }
-    }
-  }
-
-  // 4. Database coverage — each entity should have at least one endpoint
-  const allPaths = config.api.endpoints.map(e => e.path.toLowerCase());
-  for (const table of config.database.tables) {
-    const tableLower = table.name.toLowerCase();
-    if (!allPaths.some(p => p.includes(tableLower) || p.includes(tableLower + 's'))) {
-      issues.push({ layer:'DB↔API', check:'NO_ENDPOINT_FOR_TABLE', severity:'info',
-        message:`Table "${table.name}" has no direct CRUD endpoint. Ensure it's accessed via a join endpoint.` });
-      qualityScore -= 3;
-    }
-  }
-
-  // 5. Admin-only data leak check
-  const sensitiveTerms = ['payroll','salary','private','confidential','admin'];
-  for (const ep of config.api.endpoints) {
-    if (sensitiveTerms.some(t => ep.path.includes(t)) && ep.roles.includes('guest')) {
-      issues.push({ layer:'Security', check:'SENSITIVE_PUBLIC_ENDPOINT', severity:'error',
-        message:`Endpoint "${ep.method} ${ep.path}" exposes sensitive data to "guest" role.` });
-      qualityScore -= 20;
-    }
-  }
-
-  // 6. Premium gate consistency
-  const premiumEndpoints = config.api.endpoints.filter(e => e.path.includes('analytics') || e.path.includes('premium'));
-  const hasGate = config.business_logic?.rules?.some(r => r.rule === 'PREMIUM_GATE_ANALYTICS');
-  if (premiumEndpoints.length && !hasGate) {
-    issues.push({ layer:'BizLogic↔API', check:'MISSING_PREMIUM_GATE', severity:'warning',
-      message:'Premium/analytics endpoints exist but no premium subscription gate is defined.' });
-    qualityScore -= 8;
-  }
-
-  const passed = qualityScore >= 70 && !issues.some(i => i.severity === 'error');
-
-  return {
-    passed,
-    qualityScore: Math.max(0, qualityScore),
-    issues,
-    summary: {
-      tables:      config.database.tables.length,
-      endpoints:   config.api.endpoints.length,
-      pages:       config.ui.pages.length,
-      roles:       config.auth.roles.length,
-      permissions,
-    },
-  };
-}
-
-/* ================================================================
-   REPAIR ENGINE
-   ================================================================ */
-function repairConfig(config, validation) {
-  const log = [];
-  let loops = 0;
-  const MAX_LOOPS = 3;
-
-  while (!validation.passed && loops < MAX_LOOPS) {
-    loops++;
-    let repaired = false;
-
-    for (const issue of validation.issues) {
-      if (issue.repaired) continue;
-
-      if (issue.check === 'ORPHAN_ROLE') {
-        const roleName = issue.message.match(/"([^"]+)"/)?.[1];
-        if (roleName) {
-          config.auth.roles.push({ name: roleName, inherits:['user'],
-            permissions:{ read:['own_data'], write:['own_data'], delete:[] } });
-          log.push({ fix:'Added missing auth role', detail: `Role "${roleName}" added to auth config.` });
-          repaired = true; issue.repaired = true;
-        }
-      }
-
-      if (issue.check === 'MISSING_ENDPOINT') {
-        const epMatch = issue.message.match(/references (\/[^\s—]+)/);
-        if (epMatch) {
-          const path = epMatch[1];
-          config.api.endpoints.push({ method:'GET', path, roles:['user','admin'], description:'Auto-generated', _repaired:true });
-          log.push({ fix:'Auto-generated endpoint', detail:`GET ${path} synthesized to satisfy UI contract.` });
-          repaired = true; issue.repaired = true;
-        }
-      }
-
-      if (issue.check === 'SENSITIVE_PUBLIC_ENDPOINT') {
-        config.api.endpoints = config.api.endpoints.map(ep => {
-          if (ep.roles.includes('guest') &&
-              ['payroll','salary','private','confidential','admin'].some(t => ep.path.includes(t))) {
-            log.push({ fix:'Removed guest from sensitive endpoint', detail:`${ep.method} ${ep.path} — guest role stripped.` });
-            repaired = true; issue.repaired = true;
-            return { ...ep, roles: ep.roles.filter(r => r !== 'guest') };
-          }
-          return ep;
-        });
-      }
-
-      if (issue.check === 'MISSING_PREMIUM_GATE') {
-        config.business_logic.rules.push({
-          rule:'PREMIUM_GATE_AUTO', description:'Auto-gated: require active subscription for premium endpoints', enforce:'middleware'
-        });
-        log.push({ fix:'Auto-added premium gate', detail:'Business rule synthesized from API contract.' });
-        repaired = true; issue.repaired = true;
-      }
-    }
-
-    if (!repaired) break;
-    validation = validateConfig(config);
-  }
-
-  return { config, validation, log, loops };
-}
-
-/* ================================================================
-   RUNTIME SIMULATION
-   ================================================================ */
-function simulateRuntime(config, validation) {
-  const pages = (config.ui?.pages || []).map(page => ({
-    name: page.name,
-    route: page.route,
-    accessible_by: page.roles,
-    components: page.comps || page.components || [],
-  }));
-
-  const checks = [
-    {
-      name: 'Auth Guard',
-      detail: 'JWT validated on every protected route',
-      passed: config.auth?.guards?.length > 0,
-    },
-    {
-      name: 'Role Enforcement',
-      detail: `${config.auth?.roles?.length ?? 0} roles × ${config.api?.endpoints?.length ?? 0} endpoints scoped`,
-      passed: true,
-    },
-    {
-      name: 'Endpoint Coverage',
-      detail: `${config.api?.endpoints?.length ?? 0} endpoints registered`,
-      passed: config.api?.endpoints?.length > 0,
-    },
-    {
-      name: 'Business Rules',
-      detail: `${config.business_logic?.rules?.length ?? 0} rule(s) enforced`,
-      passed: (config.business_logic?.rules?.length ?? 0) >= 0,
-    },
-    {
-      name: 'Schema Contracts',
-      detail: `${validation.issues?.filter(i => !i.repaired).length ?? 0} unresolved issues`,
-      passed: validation.passed,
-    },
-    {
-      name: 'Policy Decisions',
-      detail: config.app?.policy_decisions?.length > 0
-        ? `${config.app.policy_decisions.length} conflict(s) resolved`
-        : 'No conflicts detected',
-      passed: true,
-    },
-  ];
-
-  return { pages, checks };
-}
-
-/* ================================================================
-   FULL PIPELINE ORCHESTRATOR
-   ================================================================ */
+/**
+ * Compile a prompt by sending it to the Forge44 backend API.
+ * The backend runs all pipeline stages (including the real LLM call)
+ * and returns a validated result object ready for renderAll().
+ *
+ * Error codes surface user-friendly messages in the UI via showCompileError().
+ *
+ * @param   {string}  prompt  User's application description
+ * @returns {Promise<object>} Pipeline result (intent, config, validation, runtime, ...)
+ */
 async function compilePrompt(prompt) {
-  const stages = [
-    { name:'Intent Extraction', description:'Parse features, roles, domain, conflict signals' },
-    { name:'System Design',     description:'Model entities, flows, permission matrix' },
-    { name:'Schema Generation', description:'Emit UI, API, DB, auth, business-logic schemas' },
-    { name:'Refinement',        description:'Enforce policies, close conflicts, fill gaps' },
-    { name:'Validation',        description:'Run 50+ cross-layer contract checks' },
-  ];
-
-  const tick = () => new Promise(r => setTimeout(r, 0));
-
-  // Stage 1
-  stages[0].status = 'active';
-  const t1 = performance.now();
-  const intent = extractIntent(prompt);
-  stages[0].ms = Math.round(performance.now() - t1);
-  stages[0].status = 'done';
-  await tick();
-
-  // Stage 2
-  stages[1].status = 'active';
-  const t2 = performance.now();
-  const architecture = designArchitecture(intent);
-  stages[1].ms = Math.round(performance.now() - t2);
-  stages[1].status = 'done';
-  await tick();
-
-  // Stage 3
-  stages[2].status = 'active';
-  const t3 = performance.now();
-  let config = generateSchemas(intent, architecture);
-  stages[2].ms = Math.round(performance.now() - t3);
-  stages[2].status = 'done';
-  await tick();
-
-  // Stage 4
-  stages[3].status = 'active';
-  const t4 = performance.now();
-  config = refineConfig(config, intent);
-  stages[3].ms = Math.round(performance.now() - t4);
-  stages[3].status = 'done';
-  await tick();
-
-  // Stage 5 + Repair
-  stages[4].status = 'active';
-  const t5 = performance.now();
-  let validation = validateConfig(config);
-  let repairResult = { config, validation, log:[], loops:0 };
-  if (!validation.passed) {
-    repairResult = repairConfig(config, validation);
-    config     = repairResult.config;
-    validation = repairResult.validation;
+  // Prevent accidental direct-file-open invocations
+  if (window.location.protocol === 'file:') {
+    throw new Error(
+      'Compilation requires a server. ' +
+      'Deploy to Vercel or run: npx vercel dev'
+    );
   }
-  stages[4].ms = Math.round(performance.now() - t5);
-  stages[4].status = 'done';
-  await tick();
 
-  const runtime = simulateRuntime(config, validation);
+  const COMPILE_URL = '/api/compile';
+  const TIMEOUT_MS  = 30_000;
 
-  return {
-    intent,
-    architecture,
-    config,
-    validation,
-    runtime,
-    repair: { loops: repairResult.loops, log: repairResult.log },
-    stages,
-  };
+  const controller = new AbortController();
+  const timeoutId  = setTimeout(() => controller.abort(), TIMEOUT_MS);
+
+  try {
+    const response = await fetch(COMPILE_URL, {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify({ prompt, planMode }),
+      signal:  controller.signal,
+    });
+
+    clearTimeout(timeoutId);
+
+    // Always parse JSON body â€” the API returns JSON for both success and errors
+    let data;
+    try {
+      data = await response.json();
+    } catch {
+      const e  = new Error('Server returned a non-JSON response. Please try again.');
+      e.status = response.status;
+      throw e;
+    }
+
+    if (!response.ok) {
+      const e  = new Error(data.message || `Server error (HTTP ${response.status})`);
+      e.status = response.status;
+      e.code   = response.status === 429 ? 'RATE_LIMITED'
+               : response.status === 504 ? 'TIMEOUT'
+               : response.status === 503 ? 'SERVICE_UNAVAILABLE'
+               : response.status >= 500  ? 'SERVER_ERROR'
+               : 'CLIENT_ERROR';
+      throw e;
+    }
+
+    if (!data.result) {
+      throw new Error('The server returned no result. Please try again.');
+    }
+
+    return data.result;
+
+  } catch (err) {
+    clearTimeout(timeoutId);
+
+    // AbortController fired the request timeout
+    if (err.name === 'AbortError') {
+      const e  = new Error('Request timed out after 30 seconds. Please try again.');
+      e.status = 504;
+      e.code   = 'TIMEOUT';
+      throw e;
+    }
+
+    // Network failure (offline, DNS error, etc.)
+    if (err instanceof TypeError && err.message.toLowerCase().includes('fetch')) {
+      const e  = new Error('Network error. Please check your connection and try again.');
+      e.status = 0;
+      e.code   = 'NETWORK_ERROR';
+      throw e;
+    }
+
+    throw err;
+  }
 }
+
+/* ================================================================
+   COMPILE ERROR DISPLAY
+   ================================================================ */
+
+/**
+ * Show a dismissible error bar below the prompt box.
+ * Auto-dismisses after 8 seconds.
+ *
+ * @param {string} message  User-facing error message
+ */
+function showCompileError(message) {
+  const el  = document.getElementById('compileError');
+  const msg = document.getElementById('compileErrorMsg');
+  if (!el || !msg) {
+    // Fallback: console only (element not in DOM)
+    console.warn('[showCompileError]', message);
+    return;
+  }
+  msg.textContent = message;
+  el.classList.remove('hidden');
+  clearTimeout(showCompileError._timer);
+  showCompileError._timer = setTimeout(hideCompileError, 8000);
+}
+showCompileError._timer = null;
+
+function hideCompileError() {
+  clearTimeout(showCompileError._timer);
+  document.getElementById('compileError')?.classList.add('hidden');
+}
+
+// Dismiss on close button
+document.getElementById('compileErrorClose')?.addEventListener('click', hideCompileError);
+
+// Dismiss when user re-focuses the prompt (signals they want to try again)
+document.getElementById('promptInput')?.addEventListener('focus', () => {
+  const el = document.getElementById('compileError');
+  if (el && !el.classList.contains('hidden')) hideCompileError();
+});
+
 
 /* ================================================================
    SCROLLYTELLING INTERSECTION LOGIC
